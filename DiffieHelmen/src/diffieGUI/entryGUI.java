@@ -47,8 +47,11 @@ public class entryGUI extends JFrame implements ActionListener {
         buttons.setLayout(new FlowLayout());
 
         this.loginOpt = new JButton("Login");
+        loginOpt.addActionListener(this);
         buttons.add(this.loginOpt);
         this.createUserOpt = new JButton("createUserOpt");
+        createUserOpt.addActionListener(this);
+
         buttons.add(this.createUserOpt);
         this.add(buttons);
         this.setVisible(true);
@@ -57,11 +60,12 @@ public class entryGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-               Object source = e.getSource();
-               if(source ==loginOpt)
-               {
-                   loginGUI login = new loginGUI();
-               }
+        Object source = e.getSource();
+        if (source == loginOpt)
+        {
+            this.dispose();
+            loginGUI login = new loginGUI();
+        }
 
     }
 
