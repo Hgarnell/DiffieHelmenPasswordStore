@@ -80,23 +80,23 @@ public class createUserGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.jErrorPin.setVisible(false);
         this.jErrorNull.setVisible(false);
+        Object source = e.getSource();
 
         String inputUsername = jUserField.getText();
-        String inputPassword = jPassword.getText();
+        String inputPassword = jPasswordField1.getText();
+        if (source == jButton1) {
+            //test parameters
+            if (inputUsername.equals("")) {
+                this.jErrorNull.setVisible(true);
+                this.setVisible(true);
 
-         //test parameters
-        if (inputUsername.equals("")  || inputPassword.equals("")) {
-            this.jErrorNull.setVisible(true);
-            this.setVisible(true);
-
-        }else if (!(Pattern.matches("\\d{4}", inputPassword))) {
-            this.jErrorPin.setVisible(true);
-            this.setVisible(true);
-        } else {
-            //JOptionPane.showMessageDialog(null, "Login bad");
-            this.jErrorNull.setVisible(true);
-            this.setVisible(true);
-
+            } else if (!(Pattern.matches("\\d{4}", inputPassword))) {
+                this.jErrorPin.setVisible(true);
+                this.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+                this.dispose();
+            }
         }
 
     }
