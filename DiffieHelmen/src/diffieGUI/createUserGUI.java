@@ -38,9 +38,9 @@ public class createUserGUI extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //adding the username login label and text box
-        this.jUsername = new JLabel("Enter a Username");
+        this.jUsername = new JLabel("Enter a Username ");
         this.jUserField = new JTextField();
-        jUsername.setBounds(80, 10, 100, 20);
+        jUsername.setBounds(80, 10, 150, 20);
         jUserField.setBounds(80, 30, 100, 20);
         this.add(jUsername);
         this.add(jUserField);
@@ -49,7 +49,7 @@ public class createUserGUI extends JFrame implements ActionListener {
         //adding the password login label and text box
         this.jPassword = new JLabel("Enter a Pin");
         this.jPasswordField1 = new JPasswordField();
-        jPassword.setBounds(80, 70, 100, 20);
+        jPassword.setBounds(80, 70, 150, 20);
         jPasswordField1.setBounds(80, 90, 100, 20);
         this.add(jPassword);
         this.add(jPasswordField1);
@@ -94,8 +94,9 @@ public class createUserGUI extends JFrame implements ActionListener {
                 this.jErrorPin.setVisible(true);
                 this.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
                 this.dispose();
+
+                JOptionPane.showMessageDialog(null, "Success");
             }
         }
 

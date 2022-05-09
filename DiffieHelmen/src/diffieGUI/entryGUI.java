@@ -63,7 +63,6 @@ public class entryGUI extends JFrame implements ActionListener {
         Object source = e.getSource();
         if (source == loginOpt)
         {
-            this.dispose();
             loginGUI login = new loginGUI();
         }
         if (source ==createUserOpt)
