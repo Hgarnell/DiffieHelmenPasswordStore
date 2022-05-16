@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class passwordDatabase {
 
     Connection conn = null;
-    String url = "jdbc:derby:PasswordDB;create=true";  //url of the DB host
+    String url = "jdbc:derby:DiffieDB;create=true";  //url of the DB host
 
     String dbusername = "pdc";  //your DB username
     String dbpassword = "pdc";   //your DB password
@@ -34,7 +34,7 @@ public class passwordDatabase {
         try {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
-            String tableName = "Passwords";
+            String tableName = "Password";
 
             if (!checkTableExisting(tableName)) {
                 statement.executeUpdate("CREATE TABLE " + tableName + " (Username VARCHAR(32), PassID VARCHAR(32) ,Username VARCHAR(32),Password VARCHAR(60))");
