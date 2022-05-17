@@ -26,7 +26,8 @@ public class passwordGUI extends JFrame implements ActionListener {
     private JPasswordField jPasswordField1;
     private JTextField jUserField, jPassIdField;
     private JFrame frame;
-
+    private String passInfoString;
+    private JOptionPane confirmPass;
     public passwordGUI() {
         super();
         super.setLayout(null);
@@ -66,10 +67,9 @@ public class passwordGUI extends JFrame implements ActionListener {
         this.jButton1.addActionListener(this);
         this.add(jButton1);
 
-
-
+        this.passInfoString = "<html>PassID: an identifier for you to remember the password<br><br>Username: your username<br><br>Password: your password</html>";
         //formating the information message
-        this.jInfo = new JLabel("<html>PassID: an identifier for you to remember the password<br>Username: your username<br>Password: your passdword</html>");
+        this.jInfo = new JLabel(passInfoString);
         this.jInfo.setVisible(true);
         this.jInfo.setBounds(200, 5, 250, 100);
         this.add(jInfo);
@@ -81,18 +81,19 @@ public class passwordGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String inputUsername = jUserField.getText();
-        String inputPassword = jPassword.getText();
-
-        //test parameters
-        if (inputUsername.equals("test") && inputPassword.equals("test")) {
-            JOptionPane.showMessageDialog(null, "Login Successful");
-
-        } else {
+        String inputPassword = jPasswordField1.getText();
+        String inputPassID = jPassIdField.getText();
+        //Display message if any of the textfields are empty
+        if (inputUsername.equals("") || inputPassword.equals("") || inputPassID.equals("")) {
             //if false then set the jinfo to show the error message
-            //JOptionPane.showMessageDialog(null, "Login bad");
-            this.jInfo.setText("ohanoanono");
+            this.jInfo.setText("<html>Please Ensure that all Fields are filled out</html>");
             jInfo.setForeground(Color.red);
 
+        } else {
+            jInfo.setForeground(Color.BLACK);
+
+            this.jInfo.setText(passInfoString);
+            int n = JOptionPane.showConfirmDialog(this,"Confirm Password Create");
         }
 
     }
