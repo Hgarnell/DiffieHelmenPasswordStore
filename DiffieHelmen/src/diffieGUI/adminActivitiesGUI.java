@@ -28,7 +28,7 @@ public class adminActivitiesGUI extends JFrame implements ActionListener {
 
     private JPanel buttonPanel, tablePanel;
     private JTable jTable1, jTable2;
-    private JLabel jlabel, jlabel2;
+    private JLabel jlabel, jlabel2,jlable3;
     private JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
 
@@ -37,8 +37,8 @@ public class adminActivitiesGUI extends JFrame implements ActionListener {
         this.setSize(500, 500);
         this.setLayout(new BorderLayout());
         this.jlabel = new JLabel("Passwords");
-        this.jlabel2 = new JLabel("users");
-
+        this.jlabel2 = new JLabel("Current Users");
+        this.jlable3 = new JLabel("CTRL+CLICK to deselect a row");
         this.tablePanel = new JPanel();
         tablePanel.setLayout(new BoxLayout(this.tablePanel, BoxLayout.PAGE_AXIS));
         String data[][] = {{"101", "hi", "670000"},
@@ -66,7 +66,7 @@ public class adminActivitiesGUI extends JFrame implements ActionListener {
         this.tablePanel.add(jlabel2);
 
         this.tablePanel.add(scrollPane2);
-
+        this.tablePanel.add(jlable3);
         this.add(tablePanel, BorderLayout.CENTER);
 
         this.buttonPanel = new JPanel();
