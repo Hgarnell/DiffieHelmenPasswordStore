@@ -37,7 +37,7 @@ public class userDatabase {
             String tableName = "Users";
 
             if (!checkTableExisting(tableName)) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (userid VARCHAR(12), Username VARCHAR(32), ProgPublic INT ,UserPublic INT,ProgPrivate INT, isAdmin BOOLEAN)");
+                statement.executeUpdate("CREATE TABLE " + tableName + " (userID VARCHAR(12), Username VARCHAR(32), ProgPublic INT ,UserPublic INT,ProgPrivate INT, isAdmin BOOLEAN)");
             }
             //statement.executeUpdate("INSERT INTO " + tableName + " VALUES('Fiction',0),('Non-fiction',10),('Textbook',20)");
             statement.close();

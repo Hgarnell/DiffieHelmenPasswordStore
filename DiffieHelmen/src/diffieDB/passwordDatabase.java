@@ -39,7 +39,7 @@ public class passwordDatabase {
             String tableName = "Password";
 
             if (!checkTableExisting(tableName)) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (Username VARCHAR(32), PassID VARCHAR(32) ,Username VARCHAR(32),Password VARCHAR(60))");
+                statement.executeUpdate("CREATE TABLE " + tableName + " (userID VARCHAR(32), PassID VARCHAR(32) ,Username VARCHAR(32),Password VARCHAR(60))");
             }
             //statement.executeUpdate("INSERT INTO " + tableName + " VALUES('Fiction',0),('Non-fiction',10),('Textbook',20)");
             statement.close();
@@ -54,6 +54,7 @@ public class passwordDatabase {
     public ArrayList<Password> getPasswords(User user){
         
     }
+    
     private boolean checkTableExisting(String newTableName) {
         boolean flag = false;
         try {
@@ -78,5 +79,29 @@ public class passwordDatabase {
         return flag;
     }
     
-   
+   void addUser(User newUser) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
+           
+
+        } catch (SQLException ex) {
+        }
+
+    }
+     
+      void removeUser(User newUser) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
+           
+
+        } catch (SQLException ex) {
+        }
+
+    }
 }
