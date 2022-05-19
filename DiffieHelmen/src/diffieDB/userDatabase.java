@@ -8,7 +8,7 @@ package diffieDB;
  *
  * @author hanna
  */
-import diffiehelmen.ProgramMain;
+import diffiehelmen.*;
     import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -48,8 +48,8 @@ public class userDatabase {
         }
     }
 
-    public MathQuizData checkName(String username, String password) {
-        MathQuizData data = new MathQuizData();
+    public userData checkUser(String username, String password) {
+        userData data = new userData();
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo "
@@ -103,7 +103,33 @@ public class userDatabase {
         return flag;
     }
     
-    void quitGame(int score, String username) {
+    void logOut(int score, String username) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
+           
+
+        } catch (SQLException ex) {
+        }
+
+    }
+    
+     void addUser(User newUser) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
+           
+
+        } catch (SQLException ex) {
+        }
+
+    }
+     
+      void removeUser(User newUser) {
 
         Statement statement;
         try {

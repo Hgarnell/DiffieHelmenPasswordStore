@@ -8,13 +8,15 @@ package diffieDB;
  *
  * @author hanna
  */
-import diffiehelmen.ProgramMain;
+import diffiehelmen.*;
+import diffiehelmen.User;
     import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,37 +50,10 @@ public class passwordDatabase {
         }
     }
 
-    public MathQuizData checkName(String username, String password) {
-        MathQuizData data = new MathQuizData();
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo "
-                    + "WHERE userid = '" + username + "'");
-            if (rs.next()) {
-                String pass = rs.getString("password");
-                System.out.println("***" + pass);
-                System.out.println("found user");
-                if (password.compareTo(pass) == 0) {
-                    data.currentScore = rs.getInt("score");
-                    data.loginFlag = true;
-                } else {
-                     data.loginFlag  = false;
-                }
-            } else {
-                System.out.println("no such user");
-                statement.executeUpdate("INSERT INTO UserInfo "
-                        + "VALUES('" + username + "', '" + password + "', 0)");
-                 data.loginFlag  = true;
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProgramMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return  data ;
-
-    }
     
+    public ArrayList<Password> getPasswords(User user){
+        
+    }
     private boolean checkTableExisting(String newTableName) {
         boolean flag = false;
         try {
@@ -103,16 +78,5 @@ public class passwordDatabase {
         return flag;
     }
     
-    void quitGame(int score, String username) {
-
-        Statement statement;
-        try {
-            statement = conn.createStatement();
-            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
-           
-
-        } catch (SQLException ex) {
-        }
-
-    }
+   
 }
