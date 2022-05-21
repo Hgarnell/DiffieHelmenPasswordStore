@@ -71,23 +71,7 @@ public class loginGUI extends JPanel  {
 
     }
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        String inputUsername = jUserField.getText();
-//        String inputPassword = jPassword.getText();
-//
-//        //test parameters
-//        if (inputUsername.equals("test") && inputPassword.equals("test")) {
-//            JOptionPane.showMessageDialog(null, "Login Successful");
-//
-//        } else {
-//            //JOptionPane.showMessageDialog(null, "Login bad");
-//            this.jError.setVisible(true);
-//            this.setVisible(true);
-//
-//        }
-//
-//    }
+//      
 
     public static void main(String[] args) {
         loginGUI login = new loginGUI();

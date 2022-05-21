@@ -17,7 +17,7 @@ public class diffieController implements ActionListener {
     public diffieModel model;
     public diffieView view;
 
-    public diffieController(diffieModel model, diffieView view) {
+    public diffieController(diffieView view,diffieModel model) {
         this.view = view;
         this.model = model;
         this.view.addActionListner(this);

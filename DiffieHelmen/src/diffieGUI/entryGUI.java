@@ -27,8 +27,7 @@ public class entryGUI extends JPanel {
     private JPanel buttons;
 
     public entryGUI() {
-        super();
-        super.setLayout(new GridLayout(2, 1));
+        this.setLayout(new GridLayout(2, 1));
 
         //setting the frame
         this.setSize(500, 200);
@@ -53,7 +52,7 @@ public class entryGUI extends JPanel {
         this.add(buttons);
         this.setVisible(true);
 
-    }
+    
 
-  
+   
 }
