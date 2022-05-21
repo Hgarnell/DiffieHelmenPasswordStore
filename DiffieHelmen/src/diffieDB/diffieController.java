@@ -47,10 +47,14 @@ public class diffieController implements ActionListener {
         
         // entry gui listeners
         else if(source == this.view.entryGUI.createUserOpt){
+            System.out.println("create User option pressed");
             this.view.entryGUI.setVisible(false);
             this.view.createUserGUI.setVisible(true);
         }
         else if(source == this.view.entryGUI.loginOpt){
+             System.out.println("Login option pressed");
+            this.view.entryGUI.setVisible(false);
+            this.view.loginGUI.setVisible(true);
         }
         
         //login gui listeners

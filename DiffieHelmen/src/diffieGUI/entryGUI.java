@@ -50,9 +50,7 @@ public class entryGUI extends JPanel {
 
         buttons.add(this.createUserOpt);
         this.add(buttons);
-        this.setVisible(true);
 
-    
+    }
 
-   
 }
