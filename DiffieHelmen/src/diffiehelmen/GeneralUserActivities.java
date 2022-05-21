@@ -68,7 +68,7 @@ public class GeneralUserActivities implements UserActivites {
         Password removing = null;
 
         for (Password p : file.passArrayList) {
-            if (p.passId.equals(removingPassID)) {
+            if (p.getPassId().equals(removingPassID)) {
                 removing = p;
             } else {
             }

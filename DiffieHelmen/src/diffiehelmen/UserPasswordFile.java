@@ -98,12 +98,12 @@ public class UserPasswordFile extends FileAb implements FileRead, FileWrite {
 
             boolean exists = false;
             for (Password pass : passArrayList) {
-                if (pass.passId.equals(newPass.passId)) {
+                if (pass.getPassId().equals(newPass.getPassId())) {
                     exists = true;
                 }
             }
             if (exists == true) {
-                System.out.println("A password with the pass ID of " + newPass.passId + " already exists, cannot add it to the list");
+                System.out.println("A password with the pass ID of " + newPass.getPassId() + " already exists, cannot add it to the list");
                 return false;
             }
             this.passArrayList.add(newPass);
@@ -126,7 +126,7 @@ public class UserPasswordFile extends FileAb implements FileRead, FileWrite {
 
             }
             for (int i = 0; i < passArrayList.size(); i++) {
-                if (this.passArrayList.get(i).passId.equalsIgnoreCase(removingPass.passId)) {
+                if (this.passArrayList.get(i).getPassId().equalsIgnoreCase(removingPass.getPassId())) {
                     this.passArrayList.remove(i);
                     System.out.println("Removed: " + removingPass);
                     populateFile();

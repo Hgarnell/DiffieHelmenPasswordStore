@@ -43,7 +43,7 @@ public class diffieDatabase {
                     statement.executeUpdate("CREATE TABLE " + userTableName + " (userID VARCHAR(12), username VARCHAR(32), ProgPublic INT ,UserPublic INT,Shared INT, isAdmin BOOLEAN)");
                 }
                 if (!checkTableExisting(passwordTableName)) {
-                    statement.executeUpdate("CREATE TABLE " + passwordTableName + statement.executeUpdate("CREATE TABLE " + tableName + " (userID VARCHAR(32), PassID VARCHAR(32) ,Username VARCHAR(32),Password VARCHAR(60))"));
+                    statement.executeUpdate("CREATE TABLE " + passwordTableName + statement.executeUpdate("CREATE TABLE " + passwordTableName + " (username VARCHAR(32), passID VARCHAR(32) ,passUser VARCHAR(32),Pass VARCHAR(60))"));
                 }
                 //statement.executeUpdate("INSERT INTO " + userTableName + " VALUES('Fiction',0),('Non-fiction',10),('Textbook',20)");
             }
@@ -116,18 +116,6 @@ public class diffieDatabase {
         return flag;
     }
 
-    void logOut(int score, String username) {
-
-        Statement statement;
-        try {
-            statement = conn.createStatement();
-            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid='" + username + "'");
-
-        } catch (SQLException ex) {
-        }
-
-    }
-
     void addUser(User newUser) {
 
         Statement statement;
@@ -158,16 +146,43 @@ public class diffieDatabase {
         try {
             Statement statement = conn.createStatement();
 
-            ResultSet rs = statement.executeQuery("SELECT passID, passUser  ,Pass FROM Passwords "
+            ResultSet rs = statement.executeQuery("SELECT passID, passUser  ,Pass FROM Password "
                     + "WHERE username = '" + user.getUsername() + "'");
             if (rs.next()) {
-                passwords.add(new Password(rs.getString("passID"),rs.getString("passUser"),rs.getString("Pass")));
+                passwords.add(new Password(rs.getString("passID"), rs.getString("passUser"), rs.getString("Pass")));
             } else {
                 System.out.println("User Has no Passwords");
             }
         } catch (SQLException ex) {
         }
         return passwords;
+    }
+
+    void removePassword(String string, String username) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "';");
+
+        } catch (SQLException ex) {
+            System.out.println("Check that pass ID Matches.......");
+        }
+
+    }
+
+    void addPassword(Password password, String username) {
+
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("INSERT INTO Password "
+                    + "VALUES('" + username + "','" + password.getPassId() + "', '" + password.getUsername() + "', '" + password.getPassword() + "')");
+
+        } catch (SQLException ex) {
+            System.out.println("Check that pass ID Matches.......");
+        }
+
     }
 
 }

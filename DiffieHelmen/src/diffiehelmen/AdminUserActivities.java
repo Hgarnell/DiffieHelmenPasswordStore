@@ -83,7 +83,7 @@ public class AdminUserActivities implements UserActivites {
         Password removing = null;
 
         for (Object p : uPF.getArrayList()) {
-            if (((Password) p).passId.equals(removingPassID)) {
+            if (((Password) p).getPassId().equals(removingPassID)) {
                 removing = (Password) p;
             } else {
             }
