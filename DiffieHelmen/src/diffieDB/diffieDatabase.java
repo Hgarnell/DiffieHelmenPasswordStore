@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,13 +69,16 @@ public class diffieDatabase {
                 //checking if isadmin boolean is true
                 if (rs.getBoolean("isAdmin") == true) {
                     tempUser = new AdminUser(rs.getString("username"), uK);
+                    data.userMap = getUserList();
                 } else {
                     tempUser = new GeneralUser(rs.getString("username"), uK);
+                    data.userMap = null;
                 }
 
                 if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
 
                     data.currentUser = tempUser;
+                    data.passArrayList = getPasswords(tempUser);
                     data.loginFlag = true;
                 } else {
                     data.loginFlag = false;
@@ -156,6 +161,22 @@ public class diffieDatabase {
         } catch (SQLException ex) {
         }
         return passwords;
+    }
+
+    public Map<String, Boolean> getUserList() {
+        Map<String, Boolean> users = new HashMap<>();
+        try {
+            Statement statement = conn.createStatement();
+
+            ResultSet rs = statement.executeQuery("SELECT username, isAdmin FROM Users ");
+            if (rs.next()) {
+                users.put(rs.getString("username"), rs.getBoolean("isAdmin"));
+            } else {
+                System.out.println("No");
+            }
+        } catch (SQLException ex) {
+        }
+        return users;
     }
 
     void removePassword(String string, String username) {

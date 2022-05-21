@@ -6,6 +6,7 @@ package diffieDB;
 
 import diffiehelmen.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -17,4 +18,6 @@ public class userData {
     boolean quitFlag = false;
     User currentUser = null;
     ArrayList<Password> passArrayList;   
+        Map<String,Boolean> userMap;   
+
 }

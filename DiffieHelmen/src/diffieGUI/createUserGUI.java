@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -19,10 +20,10 @@ import javax.swing.JTextField;
  *
  * @author hanna
  */
-public class createUserGUI extends JFrame implements ActionListener {
+public class createUserGUI extends JPanel implements ActionListener {
 
     private JLabel jUsername, jPassword, jErrorNull, jErrorPin;
-    private JButton jButton1;
+    public JButton jButton1;
     private JPasswordField jPasswordField1;
     private JTextField jUserField;
     private JFrame frame;
@@ -33,9 +34,7 @@ public class createUserGUI extends JFrame implements ActionListener {
 
         //creatingthe user area
         //setting the frame
-        this.setTitle("Create User");
         this.setSize(500, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //adding the username login label and text box
         this.jUsername = new JLabel("Enter a Username ");
@@ -58,7 +57,6 @@ public class createUserGUI extends JFrame implements ActionListener {
         //adding login button
         this.jButton1 = new JButton("Login");
         this.jButton1.setBounds(300, 130, 100, 20);
-        this.jButton1.addActionListener(this);
         this.add(jButton1);
         this.setVisible(true);
 
@@ -94,7 +92,6 @@ public class createUserGUI extends JFrame implements ActionListener {
                 this.jErrorPin.setVisible(true);
                 this.setVisible(true);
             } else {
-                this.dispose();
 
                 JOptionPane.showMessageDialog(null, "Success");
             }

@@ -19,9 +19,10 @@ import javax.swing.border.Border;
  *
  * @author hanna
  */
-public class entryGUI extends JFrame implements ActionListener {
+public class entryGUI extends JPanel {
 
-    private JButton loginOpt, createUserOpt;
+    public JButton loginOpt;
+    public JButton createUserOpt;
     private JLabel welcome;
     private JPanel buttons;
 
@@ -30,9 +31,7 @@ public class entryGUI extends JFrame implements ActionListener {
         super.setLayout(new GridLayout(2, 1));
 
         //setting the frame
-        this.setTitle("Diffie Helmen Password Store");
         this.setSize(500, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //welcome text
         this.welcome = new JLabel("<html> Welcome to the Diffie Hellman password Vault!<br> "
@@ -47,10 +46,8 @@ public class entryGUI extends JFrame implements ActionListener {
         buttons.setLayout(new FlowLayout());
 
         this.loginOpt = new JButton("Login");
-        loginOpt.addActionListener(this);
         buttons.add(this.loginOpt);
         this.createUserOpt = new JButton("createUserOpt");
-        createUserOpt.addActionListener(this);
 
         buttons.add(this.createUserOpt);
         this.add(buttons);
@@ -58,21 +55,5 @@ public class entryGUI extends JFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-        if (source == loginOpt)
-        {
-            loginGUI login = new loginGUI();
-        }
-        if (source ==createUserOpt)
-        {
-            createUserGUI createUser = new createUserGUI();
-        }
-
-    }
-
-    public static void main(String[] args) {
-        entryGUI test = new entryGUI();
-    }
+  
 }

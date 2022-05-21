@@ -19,10 +19,10 @@ import javax.swing.JTextField;
  *
  * @author hanna
  */
-public class passwordGUI extends JFrame implements ActionListener {
+public class passwordGUI extends JPanel implements ActionListener {
 
     private JLabel jPassId, jUsername, jPassword, jError, jInfo;
-    private JButton jButton1;
+    public JButton jButton1;
     private JPasswordField jPasswordField1;
     private JTextField jUserField, jPassIdField;
     private JFrame frame;
@@ -33,9 +33,7 @@ public class passwordGUI extends JFrame implements ActionListener {
         super.setLayout(null);
 
         //setting the frame
-        this.setTitle("Create Password");
         this.setSize(550, 300);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //adding the username login label and text box
         this.jUsername = new JLabel("Username");
@@ -64,7 +62,6 @@ public class passwordGUI extends JFrame implements ActionListener {
         //adding login button
         this.jButton1 = new JButton("Create password");
         this.jButton1.setBounds(300, 130, 140, 20);
-        this.jButton1.addActionListener(this);
         this.add(jButton1);
 
         this.passInfoString = "<html>PassID: an identifier for you to remember the password<br><br>Username: your username<br><br>Password: your password</html>";

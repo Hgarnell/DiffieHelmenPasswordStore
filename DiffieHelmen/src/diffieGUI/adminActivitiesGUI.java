@@ -24,15 +24,15 @@ import javax.swing.border.EmptyBorder;
  *
  * @author hanna
  */
-public class adminActivitiesGUI extends JFrame implements ActionListener {
+public class adminActivitiesGUI extends JPanel implements ActionListener {
 
     private JPanel buttonPanel, tablePanel;
     private JTable jTable1, jTable2;
     private JLabel jlabel, jlabel2,jlable3;
-    private JButton add, remove, logout, delUser;
+    public JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
 
-    adminActivitiesGUI() {
+    public adminActivitiesGUI() {
         super();
         this.setSize(500, 500);
         this.setLayout(new BorderLayout());
@@ -99,6 +99,7 @@ public class adminActivitiesGUI extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         adminActivitiesGUI k = new adminActivitiesGUI();
+        k.setVisible(true);
     }
 
 }

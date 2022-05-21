@@ -19,10 +19,13 @@ import javax.swing.JTextField;
  *
  * @author hanna
  */
-public class loginGUI extends JFrame implements ActionListener {
+public class loginGUI extends JPanel  {
 
-    private JLabel jUsername, jPassword, jError;
-    private JButton jButton1;
+    public JLabel jUsername;
+
+    public JLabel jPassword;
+    public JLabel jError;
+    public JButton jButton1;
     private JPasswordField jPasswordField1;
     private JTextField jUserField;
     private JFrame frame;
@@ -32,9 +35,7 @@ public class loginGUI extends JFrame implements ActionListener {
         super.setLayout(null);
 
         //setting the frame
-        this.setTitle("Diffie Helmen Login");
         this.setSize(500, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //adding the username login label and text box
         this.jUsername = new JLabel("Username");
@@ -57,7 +58,6 @@ public class loginGUI extends JFrame implements ActionListener {
         //adding login button
         this.jButton1 = new JButton("Login");
         this.jButton1.setBounds(300, 130, 100, 20);
-        this.jButton1.addActionListener(this);
         this.add(jButton1);
         this.setVisible(true);
 
@@ -71,23 +71,23 @@ public class loginGUI extends JFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String inputUsername = jUserField.getText();
-        String inputPassword = jPassword.getText();
-
-        //test parameters
-        if (inputUsername.equals("test") && inputPassword.equals("test")) {
-            JOptionPane.showMessageDialog(null, "Login Successful");
-
-        } else {
-            //JOptionPane.showMessageDialog(null, "Login bad");
-            this.jError.setVisible(true);
-            this.setVisible(true);
-
-        }
-
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        String inputUsername = jUserField.getText();
+//        String inputPassword = jPassword.getText();
+//
+//        //test parameters
+//        if (inputUsername.equals("test") && inputPassword.equals("test")) {
+//            JOptionPane.showMessageDialog(null, "Login Successful");
+//
+//        } else {
+//            //JOptionPane.showMessageDialog(null, "Login bad");
+//            this.jError.setVisible(true);
+//            this.setVisible(true);
+//
+//        }
+//
+//    }
 
     public static void main(String[] args) {
         loginGUI login = new loginGUI();

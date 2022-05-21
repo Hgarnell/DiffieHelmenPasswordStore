@@ -23,14 +23,16 @@ import javax.swing.border.EmptyBorder;
  *
  * @author hanna
  */
-public class userActivitiesGUI extends JFrame implements ActionListener {
+public class userActivitiesGUI extends JPanel implements ActionListener {
 
     private JPanel buttonPanel;
     private JTable jTable1;
     private JLabel jlabel,jlabel2;
-    private JButton add, remove, logout;
+    public JButton add, remove, logout;
     private JScrollPane scrollPane;
-    userActivitiesGUI() {
+   
+    
+    public userActivitiesGUI() {
         super();
         this.setSize(500, 250);
         this.setLayout(new BorderLayout());
