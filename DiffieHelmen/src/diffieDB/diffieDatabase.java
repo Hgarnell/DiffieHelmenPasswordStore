@@ -29,29 +29,31 @@ import java.util.logging.Logger;
 public class diffieDatabase {
 
     Connection conn = null;
-    String url = "jdbc:derby:DiffieDB   ;create=true";  //url of the DB host
+    String url = "jdbc:derby:DiffieDB;create=true";  //url of the DB host
 
     String dbusername = "pdc";  //your DB username
     String dbpassword = "pdc";   //your DB password
 
     public void dbsetup() {
         try {
+           
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
-            try ( Statement statement = conn.createStatement()) {
-                String userTableName = "Users";
-                String passwordTableName = "Password";
+            Statement statement = conn.createStatement();
 
-                if (!checkTableExisting(userTableName)) {
-                    statement.executeUpdate("CREATE TABLE " + userTableName + " (userID VARCHAR(12), username VARCHAR(32), ProgPublic INT ,UserPublic INT,Shared INT, isAdmin BOOLEAN)");
-                }
-                if (!checkTableExisting(passwordTableName)) {
-                    statement.executeUpdate("CREATE TABLE " + passwordTableName + statement.executeUpdate("CREATE TABLE " + passwordTableName + " (username VARCHAR(32), passID VARCHAR(32) ,passUser VARCHAR(32),Pass VARCHAR(60))"));
-                }
-                //statement.executeUpdate("INSERT INTO " + userTableName + " VALUES('Fiction',0),('Non-fiction',10),('Textbook',20)");
+            String userTableName = "Users";
+            String passwordTableName = "Password";
+
+            if (!checkTableExisting(userTableName)) {
+                statement.executeUpdate("CREATE TABLE " + userTableName + " (userID VARCHAR(12), username VARCHAR(32), ProgPublic INT ,UserPublic INT,Shared INT, isAdmin BOOLEAN)");
             }
+            if (!checkTableExisting(passwordTableName)) {
+                statement.executeUpdate("CREATE TABLE " + passwordTableName + statement.executeUpdate("CREATE TABLE " + passwordTableName + " (username VARCHAR(32), passID VARCHAR(32) ,passUser VARCHAR(32),Pass VARCHAR(60))"));
+            }
+            //statement.executeUpdate("INSERT INTO " + userTableName + " VALUES('Fiction',0),('Non-fiction',10),('Textbook',20)");
+            statement.close();
 
-        } catch (SQLException e) {
-            System.out.println("error");
+        } catch (Throwable e) {
+            System.out.println("Issue with setting up the Database");
 
         }
     }
@@ -124,7 +126,7 @@ public class diffieDatabase {
     void addUser(User newUser) {
 
         try {
-           Statement statement = conn.createStatement();
+            Statement statement = conn.createStatement();
             statement.executeUpdate("INSERT INTO Users "
                     + "VALUES('" + newUser.getUsername() + "', '" + newUser.getUserKeys().getPROG_PUBLIC() + "', '" + newUser.getUserKeys().getUSER_PUBLIC() + "', '" + newUser.getUserKeys().getSHARED_KEY() + "', '" + newUser.getIsAdmin() + "', 0)");
         } catch (SQLException ex) {

@@ -69,6 +69,7 @@ public class diffieController implements ActionListener {
             this.view.entryGUI.setVisible(true);
             this.view.createUserGUI.setVisible(false);
             this.view.repaint();
+            String userbname = this.view.createUserGUI.jUserField.getText();
             this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), true);
 
         }
