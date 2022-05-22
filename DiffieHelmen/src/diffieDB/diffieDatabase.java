@@ -123,9 +123,8 @@ public class diffieDatabase {
 
     void addUser(User newUser) {
 
-        Statement statement;
         try {
-            statement = conn.createStatement();
+           Statement statement = conn.createStatement();
             statement.executeUpdate("INSERT INTO Users "
                     + "VALUES('" + newUser.getUsername() + "', '" + newUser.getUserKeys().getPROG_PUBLIC() + "', '" + newUser.getUserKeys().getUSER_PUBLIC() + "', '" + newUser.getUserKeys().getSHARED_KEY() + "', '" + newUser.getIsAdmin() + "', 0)");
         } catch (SQLException ex) {

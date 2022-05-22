@@ -24,9 +24,8 @@ public class createUserGUI extends JPanel implements ActionListener {
 
     private JLabel jUsername, jPassword, jErrorNull, jErrorPin;
     public JButton jButton1;
-    private JPasswordField jPasswordField1;
-    private JTextField jUserField;
-    private JFrame frame;
+    public JPasswordField jPasswordField1;
+    public JTextField jUserField;
 
     public createUserGUI() {
         super();

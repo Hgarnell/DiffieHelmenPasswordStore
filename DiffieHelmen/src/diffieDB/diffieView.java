@@ -29,8 +29,19 @@ public class diffieView extends JFrame implements Observer {
 
     public diffieView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 200);;
+        this.setSize(600, 600);
         this.add(entryGUI);
+        this.add(loginGUI);
+        this.loginGUI.setVisible(false);
+        this.add(createUserGUI);
+        this.createUserGUI.setVisible(false);
+
+        this.add(userActivitiesGUI);
+        this.userActivitiesGUI.setVisible(false);
+
+        this.add(adminActivities);
+        this.adminActivities.setVisible(false);
+
         this.setVisible(true);
 
     }
@@ -48,7 +59,7 @@ public class diffieView extends JFrame implements Observer {
         this.userActivitiesGUI.add.addActionListener(listener);
         this.userActivitiesGUI.remove.addActionListener(listener);
         this.userActivitiesGUI.logout.addActionListener(listener);
-        
+
         this.userActivitiesGUI.add.addActionListener(listener);
         this.userActivitiesGUI.remove.addActionListener(listener);
         this.userActivitiesGUI.logout.addActionListener(listener);
@@ -63,24 +74,23 @@ public class diffieView extends JFrame implements Observer {
         if (!data.loginFlag) {
             this.loginGUI.jError.setVisible(true);
 
-        } else if (!data.currentUser.getIsAdmin()) {
-            this.genUserStart();
-            this.started = true;
-            this.setQuestion(data.num1, data.num2);
-        } else if (data.quitFlag) {
-            this.quitGame(data.currentScore);
-        } else {
-            this.setQuestion(data.num1, data.num2);
-        }
-
+        } else if (data.loginFlag) {
+            this.loginGUI.setVisible(false);
+            if (!data.currentUser.getIsAdmin()) {
+                this.userActivitiesGUI.setVisible(true);
+                this.started = true;
+            } else {
+                this.adminActivities.setVisible(true);
+                this.started = true;
+            }
+        }// else if (data.quitFlag) {
+//            this.quitGame(data.currentScore);
+//        } else {
+//            this.setQuestion(data.num1, data.num2);
+//        }
     }
 
     void genUserStart() {
-        this.getContentPane().removeAll();
-        this.add(userActivitiesGUI);
     }
 
-    public static void main(String[] args) {
-        diffieView df = new diffieView();
-    }
 }

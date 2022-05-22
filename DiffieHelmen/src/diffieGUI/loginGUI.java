@@ -26,13 +26,11 @@ public class loginGUI extends JPanel  {
     public JLabel jPassword;
     public JLabel jError;
     public JButton jButton1;
-    private JPasswordField jPasswordField1;
-    private JTextField jUserField;
-    private JFrame frame;
+    public JPasswordField jPasswordField1;
+    public JTextField jUserField;
 
     public loginGUI() {
-        super();
-        super.setLayout(null);
+        this.setLayout(null);
 
         //setting the frame
         this.setSize(500, 200);

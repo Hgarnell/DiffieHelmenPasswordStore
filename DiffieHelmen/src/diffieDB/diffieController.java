@@ -17,7 +17,7 @@ public class diffieController implements ActionListener {
     public diffieModel model;
     public diffieView view;
 
-    public diffieController(diffieView view,diffieModel model) {
+    public diffieController(diffieView view, diffieModel model) {
         this.view = view;
         this.model = model;
         this.view.addActionListner(this);
@@ -26,46 +26,53 @@ public class diffieController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         //admin activity gui listeners
         if (source == this.view.adminActivities.add) {
-        }
-        else if(source == this.view.adminActivities.delUser){
-        }
-        else if(source == this.view.adminActivities.logout){
-        }
-        else if(source == this.view.adminActivities.remove){
-        }
-        
-        //user activity gui listeners
-        else if(source == this.view.userActivitiesGUI.add) {
-        }
-         else if(source == this.view.userActivitiesGUI.remove) {
-        }
-        else if(source == this.view.userActivitiesGUI.logout) {
-        }
-        
-        // entry gui listeners
-        else if(source == this.view.entryGUI.createUserOpt){
+        } else if (source == this.view.adminActivities.delUser) {
+        } else if (source == this.view.adminActivities.logout) {
+            System.out.println("create logout  pressed");
+            this.view.entryGUI.setVisible(true);
+            this.view.adminActivities.setVisible(false);
+            this.view.repaint();
+        } else if (source == this.view.adminActivities.remove) {
+        } //user activity gui listeners               
+        else if (source == this.view.userActivitiesGUI.add) {
+            System.out.println("create logout  pressed");
+            this.view.entryGUI.setVisible(true);
+            this.view.userActivitiesGUI.setVisible(false);
+            this.view.repaint();
+        } else if (source == this.view.userActivitiesGUI.remove) {
+        } else if (source == this.view.userActivitiesGUI.logout) {
+        } // entry gui listeners
+        else if (source == this.view.entryGUI.createUserOpt) {
             System.out.println("create User option pressed");
             this.view.entryGUI.setVisible(false);
             this.view.createUserGUI.setVisible(true);
-        }
-        else if(source == this.view.entryGUI.loginOpt){
-             System.out.println("Login option pressed");
-            this.view.entryGUI.setVisible(false);
+            this.view.repaint();
+
+        } else if (source == this.view.entryGUI.loginOpt) {
+            System.out.println("Login option pressed");
             this.view.loginGUI.setVisible(true);
+            this.view.entryGUI.setVisible(false);
+            this.view.repaint();
+        } //login gui listeners
+        else if (source == this.view.loginGUI.jButton1) {
+            try {
+                this.model.checkUser(this.view.loginGUI.jUserField.getText(), Integer.getInteger(this.view.loginGUI.jPasswordField1.getText()));
+            } catch (Exception x) {
+
+            }
+        } //create user gui listeners
+        else if (source == this.view.createUserGUI.jButton1) {
+            System.out.println("create User option pressed");
+            this.view.entryGUI.setVisible(true);
+            this.view.createUserGUI.setVisible(false);
+            this.view.repaint();
+            this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), true);
+
         }
-        
-        //login gui listeners
-        else if(source == this.view.loginGUI.jButton1){
-        }
-        
-        //create user gui listeners
-        else if(source == this.view.createUserGUI.jButton1){
-        }
-        
-        
+
 //            case ():
 //                String username = this.view.unInput.getText();
 //                String Password = this.view.pwInput.getText();
@@ -79,7 +86,5 @@ public class diffieController implements ActionListener {
 //                break;
 //            default:
 //                break;
-
-    
-}
+    }
 }
