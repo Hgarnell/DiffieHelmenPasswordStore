@@ -28,9 +28,10 @@ public class adminActivitiesGUI extends JPanel implements ActionListener {
 
     private JPanel buttonPanel, tablePanel;
     private JTable jTable1, jTable2;
-    private JLabel jlabel, jlabel2,jlable3;
+    private JLabel jlabel, jlabel2, jlable3;
     public JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
+    public String data[][];
 
     public adminActivitiesGUI() {
         super();
@@ -41,9 +42,8 @@ public class adminActivitiesGUI extends JPanel implements ActionListener {
         this.jlable3 = new JLabel("CTRL+CLICK to deselect a row");
         this.tablePanel = new JPanel();
         tablePanel.setLayout(new BoxLayout(this.tablePanel, BoxLayout.PAGE_AXIS));
-        String data[][] = {{"101", "hi", "670000"},
-        {"102", "hi", "780000"},
-        {"101", "hi", "700000"}};
+        String data2[][] = {{" ", " ", " "}, {" ", " ", " "}};
+        data = data2;
         String column[] = {"PASSID", "username", "password"};
 
         this.jTable1 = new JTable(data, column);

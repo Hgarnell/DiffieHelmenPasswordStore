@@ -82,6 +82,8 @@ public class diffieView extends JFrame implements Observer {
                 this.started = true;
             } else {
                 this.adminActivities.setVisible(true);
+                this.userActivitiesGUI.data = data.passArrayList;
+
                 this.started = true;
             }
         }// else if (data.quitFlag) {
