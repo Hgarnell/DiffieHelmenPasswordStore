@@ -50,7 +50,8 @@ public class diffieModel extends Observable {
     }
 
     public void quitGame() {
-        this.data.quitFlag = true;
+        this.data.currentUser = null;
+        this.data.loginFlag = false;
         this.setChanged();
     }
 

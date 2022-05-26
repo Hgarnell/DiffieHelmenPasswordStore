@@ -24,14 +24,15 @@ import javax.swing.border.EmptyBorder;
  *
  * @author hanna
  */
-public class adminActivitiesGUI extends JPanel implements ActionListener {
+public class adminActivitiesGUI extends JPanel {
 
     private JPanel buttonPanel, tablePanel;
     private JTable jTable1, jTable2;
     private JLabel jlabel, jlabel2, jlable3;
     public JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
-    public String data[][];
+    public String[][] dataPass;
+    public String[][] dataUser;
 
     public adminActivitiesGUI() {
         super();
@@ -43,15 +44,16 @@ public class adminActivitiesGUI extends JPanel implements ActionListener {
         this.tablePanel = new JPanel();
         tablePanel.setLayout(new BoxLayout(this.tablePanel, BoxLayout.PAGE_AXIS));
         String data2[][] = {{" ", " ", " "}, {" ", " ", " "}};
-        data = data2;
+        dataPass = data2;
         String column[] = {"PASSID", "username", "password"};
 
-        this.jTable1 = new JTable(data, column);
+        this.jTable1 = new JTable(dataPass, column);
         jTable1.setBounds(30, 40, 100, 200);
         jTable1.setDefaultEditor(Object.class, null);
+        dataUser = data2;
+        String column2[] = {"Admin?", "username"};
 
-        String column2[] = {"isAdmin?", "username"};
-        this.jTable2 = new JTable(data, column2);
+        this.jTable2 = new JTable(dataPass, column2);
         jTable2.setBounds(30, 40, 100, 200);
         jTable2.setDefaultEditor(Object.class, null);
 
@@ -92,10 +94,7 @@ public class adminActivitiesGUI extends JPanel implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
     public static void main(String[] args) {
         adminActivitiesGUI k = new adminActivitiesGUI();

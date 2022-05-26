@@ -56,9 +56,9 @@ public class diffieView extends JFrame implements Observer {
         this.passwordGUI.jButton1.addActionListener(listener);
 
         this.adminActivities.delUser.addActionListener(listener);
-        this.userActivitiesGUI.add.addActionListener(listener);
-        this.userActivitiesGUI.remove.addActionListener(listener);
-        this.userActivitiesGUI.logout.addActionListener(listener);
+        this.adminActivities.add.addActionListener(listener);
+        this.adminActivities.remove.addActionListener(listener);
+        this.adminActivities.logout.addActionListener(listener);
 
         this.userActivitiesGUI.add.addActionListener(listener);
         this.userActivitiesGUI.remove.addActionListener(listener);
@@ -78,18 +78,18 @@ public class diffieView extends JFrame implements Observer {
             this.loginGUI.setVisible(false);
             if (!data.currentUser.getIsAdmin()) {
                 this.userActivitiesGUI.setVisible(true);
-                this.userActivitiesGUI.data = data.passArrayList;
+                this.userActivitiesGUI.dataPass = data.passArrayList;
                 this.started = true;
             } else {
                 this.adminActivities.setVisible(true);
-                this.userActivitiesGUI.data = data.passArrayList;
+                this.userActivitiesGUI.dataPass = data.passArrayList;
 
                 this.started = true;
             }
-        }// else if (data.quitFlag) {
-//            this.quitGame(data.currentScore);
+        }// else if (dataPass.quitFlag) {
+//            this.quitGame(dataPass.currentScore);
 //        } else {
-//            this.setQuestion(data.num1, data.num2);
+//            this.setQuestion(dataPass.num1, dataPass.num2);
 //        }
     }
 

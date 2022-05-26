@@ -30,7 +30,7 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
     private JLabel jlabel, jlabel2;
     public JButton add, remove, logout;
     private JScrollPane scrollPane;
-    public String data[][];
+    public String[][] dataPass;
 
     public userActivitiesGUI() {
         super();
@@ -42,9 +42,9 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
         this.add(jlabel2, BorderLayout.SOUTH);
 
        String data2[][] =   {{" "," "," "},{" "," "," "}};
-       data =  data2;
+       dataPass =  data2;
         String column[] = {"PASSID", "username", "password"};
-        this.jTable1 = new JTable(data, column);
+        this.jTable1 = new JTable(dataPass, column);
         jTable1.setBounds(30, 40, 200, 300);
         jTable1.setDefaultEditor(Object.class, null);
 

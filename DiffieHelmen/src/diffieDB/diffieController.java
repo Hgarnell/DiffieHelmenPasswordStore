@@ -35,6 +35,7 @@ public class diffieController implements ActionListener {
             System.out.println("create logout  pressed");
             this.view.entryGUI.setVisible(true);
             this.view.adminActivities.setVisible(false);
+            this.model.quitGame();
             this.view.repaint();
         } else if (source == this.view.adminActivities.remove) {
         } //user activity gui listeners               
@@ -45,6 +46,10 @@ public class diffieController implements ActionListener {
             this.view.repaint();
         } else if (source == this.view.userActivitiesGUI.remove) {
         } else if (source == this.view.userActivitiesGUI.logout) {
+            this.view.entryGUI.setVisible(true);
+            this.view.userActivitiesGUI.setVisible(true);
+            this.model.quitGame();
+
         } // entry gui listeners
         else if (source == this.view.entryGUI.createUserOpt) {
             System.out.println("create User option pressed");
@@ -65,9 +70,9 @@ public class diffieController implements ActionListener {
                 System.out.println(this.view.loginGUI.jPasswordField1.getText());
                 Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
                 System.out.println(l);
-                        
-                this.model.checkUser(this.view.loginGUI.jUserField.getText(),  l);
-                 this.view.repaint();
+
+                this.model.checkUser(this.view.loginGUI.jUserField.getText(), l);
+                this.view.repaint();
 
             } catch (Exception x) {
                 System.out.println(x);
