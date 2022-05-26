@@ -69,6 +69,12 @@ public class UserIntializer extends UserKeyGenerator {
         BigInteger x = new BigInteger(Integer.toString(scanInput));
         return x;
     }
+    
+    public static BigInteger getBigInt(Integer scanInput) {
+
+        BigInteger x = new BigInteger(Integer.toString(scanInput));
+        return x;
+    }
 
     public int getPin() {
         int scanInput = 0;

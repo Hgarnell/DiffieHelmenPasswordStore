@@ -36,7 +36,7 @@ public class diffieDatabase {
 
     public void dbsetup() {
         try {
-           
+
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
 
@@ -44,7 +44,7 @@ public class diffieDatabase {
             String passwordTableName = "Password";
 
             if (!checkTableExisting(userTableName)) {
-                statement.executeUpdate("CREATE TABLE " + userTableName + " (userID VARCHAR(12), username VARCHAR(32), ProgPublic INT ,UserPublic INT,Shared INT, isAdmin BOOLEAN)");
+                statement.executeUpdate("CREATE TABLE " + userTableName + " ( username VARCHAR(32), ProgPublic INT ,UserPublic INT,Shared INT, isAdmin BOOLEAN)");
             }
             if (!checkTableExisting(passwordTableName)) {
                 statement.executeUpdate("CREATE TABLE " + passwordTableName + statement.executeUpdate("CREATE TABLE " + passwordTableName + " (username VARCHAR(32), passID VARCHAR(32) ,passUser VARCHAR(32),Pass VARCHAR(60))"));
@@ -58,16 +58,19 @@ public class diffieDatabase {
         }
     }
 
-    public userData checkUser(String username, int password) {
+    public userData checkUser(String username, Integer password) {
+        System.out.println("entered check user data");
         userData data = new userData();
         User tempUser;
+
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT username, ProgPublic  ,UserPublic ,ProgPrivate , isAdmin FROM Users "
+
+            ResultSet rs = statement.executeQuery("SELECT username, ProgPublic  ,UserPublic ,Shared , isAdmin FROM Users "
                     + "WHERE username = '" + username + "'");
             if (rs.next()) {
                 //creating a userkey from keys stored
-                UserKey uK = new UserKey((new Key(rs.getString("ProgPublic"))), (new Key(rs.getString("UserPublic"))), (new Key(rs.getString("ProgPrivate"))));
+                UserKey uK = new UserKey((new Key(rs.getString("ProgPublic"))), (new Key(rs.getString("UserPublic"))), (new Key(rs.getString("Shared"))));
                 //checking if isadmin boolean is true
                 if (rs.getBoolean("isAdmin") == true) {
                     tempUser = new AdminUser(rs.getString("username"), uK);
@@ -76,6 +79,7 @@ public class diffieDatabase {
                     tempUser = new GeneralUser(rs.getString("username"), uK);
                     data.userMap = null;
                 }
+                System.out.println(tempUser.getUserKeys().checkKey(getBigInt(password)));
 
                 if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
 
@@ -91,6 +95,7 @@ public class diffieDatabase {
                 data.loginFlag = false;
 
             }
+            statement.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(ProgramMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,18 +132,19 @@ public class diffieDatabase {
 
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO Users "
-                    + "VALUES('" + newUser.getUsername() + "', '" + newUser.getUserKeys().getPROG_PUBLIC() + "', '" + newUser.getUserKeys().getUSER_PUBLIC() + "', '" + newUser.getUserKeys().getSHARED_KEY() + "', '" + newUser.getIsAdmin() + "', 0)");
+            statement.executeUpdate("INSERT INTO Users VALUES('" + newUser.getUsername() + "', " + newUser.getUserKeys().getPROG_PUBLIC().getKey() + ", " + newUser.getUserKeys().getUSER_PUBLIC().getKey() + ", " + newUser.getUserKeys().getSHARED_KEY().getKey() + ", " + newUser.getIsAdmin() + ")");
+            statement.close();
+
         } catch (SQLException ex) {
+            System.out.println("SQL error");
         }
 
     }
 
     void removeUser(User newUser) {
 
-        Statement statement;
         try {
-            statement = conn.createStatement();
+            Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Users WHERE username ='" + newUser.getUsername() + "';");
             statement.executeUpdate("DELETE FROM Passwords WHERE username ='" + newUser.getUsername() + "';");
 
@@ -147,7 +153,7 @@ public class diffieDatabase {
 
     }
 
-    public ArrayList<Password> getPasswords(User user) {
+    public String[][] getPasswords(User user) {
         ArrayList<Password> passwords = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
@@ -161,7 +167,16 @@ public class diffieDatabase {
             }
         } catch (SQLException ex) {
         }
-        return passwords;
+
+        String[][] passArray = new String[passwords.size()][3];
+        int k = 0;
+        for (Password p : passwords) {
+            passArray[k][0] = p.getPassId();
+            passArray[k][1] = p.getUsername();
+            passArray[k][2] = p.getPassword();
+
+        }
+        return passArray;
     }
 
     public Map<String, Boolean> getUserList() {
@@ -182,9 +197,8 @@ public class diffieDatabase {
 
     void removePassword(String string, String username) {
 
-        Statement statement;
         try {
-            statement = conn.createStatement();
+            Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "';");
 
         } catch (SQLException ex) {
@@ -195,9 +209,8 @@ public class diffieDatabase {
 
     void addPassword(Password password, String username) {
 
-        Statement statement;
         try {
-            statement = conn.createStatement();
+            Statement statement = conn.createStatement();
             statement.executeUpdate("INSERT INTO Password "
                     + "VALUES('" + username + "','" + password.getPassId() + "', '" + password.getUsername() + "', '" + password.getPassword() + "')");
 

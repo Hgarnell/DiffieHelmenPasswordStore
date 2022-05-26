@@ -6,6 +6,7 @@ package diffieDB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Integer.parseInt;
 import javax.xml.transform.Source;
 
 /**
@@ -59,17 +60,26 @@ public class diffieController implements ActionListener {
         } //login gui listeners
         else if (source == this.view.loginGUI.jButton1) {
             try {
-                this.model.checkUser(this.view.loginGUI.jUserField.getText(), Integer.getInteger(this.view.loginGUI.jPasswordField1.getText()));
-            } catch (Exception x) {
+                System.out.println("Login User option pressed");
+                System.out.println(this.view.loginGUI.jUserField.getText());
+                System.out.println(this.view.loginGUI.jPasswordField1.getText());
+                Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
+                System.out.println(l);
+                        
+                this.model.checkUser(this.view.loginGUI.jUserField.getText(),  l);
+                 this.view.repaint();
 
+            } catch (Exception x) {
+                System.out.println(x);
             }
+
         } //create user gui listeners
         else if (source == this.view.createUserGUI.jButton1) {
             System.out.println("create User option pressed");
             this.view.entryGUI.setVisible(true);
             this.view.createUserGUI.setVisible(false);
             this.view.repaint();
-            String userbname = this.view.createUserGUI.jUserField.getText();
+            String username = this.view.createUserGUI.jUserField.getText();
             this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), true);
 
         }

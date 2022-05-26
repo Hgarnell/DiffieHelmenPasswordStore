@@ -25,16 +25,10 @@ public class diffieModel extends Observable {
         this.db.dbsetup();
     }
 
-    public void checkUser(String username, int masterpin) {
-                System.out.println("checkYser notified");
+    public void checkUser(String username, Integer masterpin) {
+        System.out.println("Check User notified");
 
         this.data = this.db.checkUser(username, masterpin);
-        if (data.loginFlag) {
-            if (data.currentUser.getIsAdmin()) {
-                this.setChanged();
-                this.notifyObservers(this.data);
-            }
-        }
         this.setChanged();
         this.notifyObservers(this.data);
     }
@@ -43,14 +37,12 @@ public class diffieModel extends Observable {
         UserKeyGenerator k = new UserKeyGenerator();
         System.out.println("addUser notified");
         if (Pattern.matches("\\d{4}", String.valueOf(secret))) {
-            User addingUser;
-
+            UserKey v = k.userKeyGenerator(new BigInteger(secret));
             if (isAdmin) {
-                addingUser = new AdminUser(username, k.userKeyGenerator(new BigInteger(secret)));
+                this.db.addUser(new AdminUser(username, k.userKeyGenerator(new BigInteger(secret))));
             } else {
-                addingUser = new GeneralUser(username, k.userKeyGenerator(new BigInteger(secret)));
+                this.db.addUser(new GeneralUser(username, k.userKeyGenerator(new BigInteger(secret))));
             }
-            this.db.addUser(addingUser);
             return true;
         } else {
             return false;

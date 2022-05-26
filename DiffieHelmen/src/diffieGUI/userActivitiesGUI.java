@@ -27,11 +27,11 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
 
     private JPanel buttonPanel;
     private JTable jTable1;
-    private JLabel jlabel,jlabel2;
+    private JLabel jlabel, jlabel2;
     public JButton add, remove, logout;
     private JScrollPane scrollPane;
-   
-    
+    public String data[][];
+
     public userActivitiesGUI() {
         super();
         this.setSize(500, 250);
@@ -39,34 +39,31 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
         this.jlabel = new JLabel("Passwords");
         this.jlabel2 = new JLabel("CTRL+CLICK to deselect a row");
         this.add(jlabel, BorderLayout.NORTH);
-        this.add(jlabel2,BorderLayout.SOUTH);
-       
-        String data[][] = {{"101", "hi", "670000"},
-        {"102", "hi", "780000"},
-        {"101", "hi", "700000"}};
+        this.add(jlabel2, BorderLayout.SOUTH);
+
+        data [][] =={"","",""};
         String column[] = {"PASSID", "username", "password"};
         this.jTable1 = new JTable(data, column);
         jTable1.setBounds(30, 40, 200, 300);
         jTable1.setDefaultEditor(Object.class, null);
-        
+
         this.scrollPane = new JScrollPane(jTable1);
-        this.scrollPane.setBorder(BorderFactory.createEmptyBorder(10,10,5,5));
+        this.scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
         this.add(scrollPane, BorderLayout.CENTER);
-        
-         this.buttonPanel = new JPanel();
+
+        this.buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
         this.add = new JButton("Add");
         this.remove = new JButton("Remove");
         this.logout = new JButton("Logout");
 
-                this.buttonPanel.add(logout);
+        this.buttonPanel.add(logout);
         buttonPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 
         this.buttonPanel.add(add);
-        buttonPanel.add(Box.createRigidArea(new Dimension(10,10)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 
         this.buttonPanel.add(remove);
-
 
         this.buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         this.add(buttonPanel, BorderLayout.EAST);

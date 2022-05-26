@@ -78,6 +78,7 @@ public class diffieView extends JFrame implements Observer {
             this.loginGUI.setVisible(false);
             if (!data.currentUser.getIsAdmin()) {
                 this.userActivitiesGUI.setVisible(true);
+                this.userActivitiesGUI.data = data.passArrayList;
                 this.started = true;
             } else {
                 this.adminActivities.setVisible(true);

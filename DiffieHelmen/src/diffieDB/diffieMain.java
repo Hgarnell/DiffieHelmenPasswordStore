@@ -14,6 +14,6 @@ public class diffieMain{
         diffieModel model = new diffieModel();
         diffieController controller = new diffieController(view,model);
         model.addObserver(view);
-    }
+        }
 
 }

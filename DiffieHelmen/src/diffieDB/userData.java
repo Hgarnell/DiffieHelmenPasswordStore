@@ -17,7 +17,7 @@ public class userData {
     boolean loginFlag = false;
     boolean quitFlag = false;
     User currentUser = null;
-    ArrayList<Password> passArrayList;   
+    String[][]  passArrayList;   
         Map<String,Boolean> userMap;   
 
 }
