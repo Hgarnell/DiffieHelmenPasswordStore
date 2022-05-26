@@ -81,10 +81,11 @@ public class diffieView extends JFrame implements Observer {
                 this.userActivitiesGUI.dataPass = data.passArrayList;
                 this.started = true;
             } else {
-                this.adminActivities.setVisible(true);
-                this.userActivitiesGUI.dataPass = data.passArrayList;
-
+                this.adminActivities.dataPass = data.passArrayList;
+                this.adminActivities.dataUser = data.userMap;
                 this.started = true;
+                this.adminActivities.setVisible(true);
+
             }
         }// else if (dataPass.quitFlag) {
 //            this.quitGame(dataPass.currentScore);

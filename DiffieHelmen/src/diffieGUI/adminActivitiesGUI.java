@@ -27,7 +27,7 @@ import javax.swing.border.EmptyBorder;
 public class adminActivitiesGUI extends JPanel {
 
     private JPanel buttonPanel, tablePanel;
-    private JTable jTable1, jTable2;
+    public JTable passTable, userTable;
     private JLabel jlabel, jlabel2, jlable3;
     public JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
@@ -47,20 +47,20 @@ public class adminActivitiesGUI extends JPanel {
         dataPass = data2;
         String column[] = {"PASSID", "username", "password"};
 
-        this.jTable1 = new JTable(dataPass, column);
-        jTable1.setBounds(30, 40, 100, 200);
-        jTable1.setDefaultEditor(Object.class, null);
+        this.passTable = new JTable(dataPass, column);
+        passTable.setBounds(30, 40, 100, 200);
+        passTable.setDefaultEditor(Object.class, null);
         dataUser = data2;
         String column2[] = {"Admin?", "username"};
 
-        this.jTable2 = new JTable(dataPass, column2);
-        jTable2.setBounds(30, 40, 100, 200);
-        jTable2.setDefaultEditor(Object.class, null);
+        this.userTable = new JTable(dataUser, column2);
+        userTable.setBounds(30, 40, 100, 200);
+        userTable.setDefaultEditor(Object.class, null);
 
-        this.scrollPane2 = new JScrollPane(jTable2);
+        this.scrollPane2 = new JScrollPane(userTable);
         this.scrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        this.scrollPane = new JScrollPane(jTable1);
+        this.scrollPane = new JScrollPane(passTable);
         this.scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         this.tablePanel.add(jlabel);

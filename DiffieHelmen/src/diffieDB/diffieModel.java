@@ -29,6 +29,7 @@ public class diffieModel extends Observable {
         System.out.println("Check User notified");
 
         this.data = this.db.checkUser(username, masterpin);
+        
         this.setChanged();
         this.notifyObservers(this.data);
     }
@@ -47,6 +48,12 @@ public class diffieModel extends Observable {
         } else {
             return false;
         }
+    }
+
+    public boolean removeUser(String username) {
+
+        return this.db.removeUser(username);
+
     }
 
     public void quitGame() {

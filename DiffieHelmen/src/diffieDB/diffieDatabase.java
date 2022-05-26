@@ -85,6 +85,7 @@ public class diffieDatabase {
 
                     data.currentUser = tempUser;
                     data.passArrayList = getPasswords(tempUser);
+                    data.userMap  = getUserList();
                     data.loginFlag = true;
                 } else {
                     data.loginFlag = false;
@@ -141,16 +142,17 @@ public class diffieDatabase {
 
     }
 
-    void removeUser(User newUser) {
+    boolean removeUser(String k) {
 
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("DELETE FROM Users WHERE username ='" + newUser.getUsername() + "';");
-            statement.executeUpdate("DELETE FROM Passwords WHERE username ='" + newUser.getUsername() + "';");
-
+            statement.executeUpdate("DELETE FROM Users WHERE username ='" + k + "';");
+            statement.executeUpdate("DELETE FROM Passwords WHERE username ='" + k + "';");
+            return true;
         } catch (SQLException ex) {
         }
 
+        return false;
     }
 
     public String[][] getPasswords(User user) {
@@ -179,7 +181,7 @@ public class diffieDatabase {
         return passArray;
     }
 
-    public Map<String, Boolean> getUserList() {
+    public String[][] getUserList() {
         Map<String, Boolean> users = new HashMap<>();
         try {
             Statement statement = conn.createStatement();
@@ -192,7 +194,16 @@ public class diffieDatabase {
             }
         } catch (SQLException ex) {
         }
-        return users;
+        String[][] userArray = new String[users.size()][2];
+        int k = 0;
+        for (String usernames : users.keySet()) {
+            userArray[k][0] = users.get(usernames).toString();
+
+            userArray[k][1] = usernames;
+
+            k++;
+        }
+        return userArray;
     }
 
     void removePassword(String string, String username) {
