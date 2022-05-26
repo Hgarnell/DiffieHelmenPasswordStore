@@ -41,7 +41,8 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
         this.add(jlabel, BorderLayout.NORTH);
         this.add(jlabel2, BorderLayout.SOUTH);
 
-        data [][] =={"","",""};
+       String data2[][] =   {{" "," "," "},{" "," "," "}};
+       data =  data2;
         String column[] = {"PASSID", "username", "password"};
         this.jTable1 = new JTable(data, column);
         jTable1.setBounds(30, 40, 200, 300);
