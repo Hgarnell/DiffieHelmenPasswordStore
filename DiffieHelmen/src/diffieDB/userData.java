@@ -7,6 +7,7 @@ package diffieDB;
 import diffiehelmen.*;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,5 +20,7 @@ public class userData {
     User currentUser = null;
     String[][] passArrayList;
     String[][] userMap;
+    JTable passTableData;
+    JTable userTableData;
 
 }

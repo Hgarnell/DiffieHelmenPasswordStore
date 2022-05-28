@@ -7,6 +7,8 @@ package diffieDB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.xml.transform.Source;
 
 /**
@@ -16,12 +18,14 @@ import javax.xml.transform.Source;
 public class diffieController implements ActionListener {
 
     public diffieModel model;
+
     public diffieView view;
 
     public diffieController(diffieView view, diffieModel model) {
         this.view = view;
         this.model = model;
         this.view.addActionListner(this);
+
     }
 
     @Override
@@ -64,6 +68,7 @@ public class diffieController implements ActionListener {
             System.out.println("Login option pressed");
             this.view.loginGUI.setVisible(true);
             this.view.entryGUI.setVisible(false);
+
             this.view.repaint();
         } //login gui listeners
         else if (source == this.view.loginGUI.jButton1) {

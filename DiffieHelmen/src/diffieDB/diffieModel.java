@@ -29,12 +29,15 @@ public class diffieModel extends Observable {
         System.out.println("Check User notified");
 
         this.data = this.db.checkUser(username, masterpin);
-        
         this.setChanged();
         this.notifyObservers(this.data);
     }
+    
+    
+    
 
     public boolean addUser(String username, String secret, Boolean isAdmin) {
+
         UserKeyGenerator k = new UserKeyGenerator();
         System.out.println("addUser notified");
         if (Pattern.matches("\\d{4}", String.valueOf(secret))) {
@@ -44,6 +47,9 @@ public class diffieModel extends Observable {
             } else {
                 this.db.addUser(new GeneralUser(username, k.userKeyGenerator(new BigInteger(secret))));
             }
+            this.setChanged();
+            this.notifyObservers(this.data);
+
             return true;
         } else {
             return false;
@@ -52,13 +58,19 @@ public class diffieModel extends Observable {
 
     public boolean removeUser(String username) {
 
-        return this.db.removeUser(username);
+        if (this.db.removeUser(username)) {
+            this.setChanged();
+            this.notifyObservers(this.data);
+            return true;
+        }
+        return false;
 
     }
 
     public void quitGame() {
         this.data.currentUser = null;
         this.data.loginFlag = false;
+        this.notifyObservers(this.data);
         this.setChanged();
     }
 

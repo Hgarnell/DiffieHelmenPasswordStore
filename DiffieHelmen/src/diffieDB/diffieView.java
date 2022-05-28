@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 /**
  *
@@ -41,7 +42,6 @@ public class diffieView extends JFrame implements Observer {
 
         this.add(adminActivities);
         this.adminActivities.setVisible(false);
-
         this.setVisible(true);
 
     }
@@ -68,6 +68,24 @@ public class diffieView extends JFrame implements Observer {
 
     }
 
+    public void updateTable(userData data) {
+
+        if (data.currentUser.getIsAdmin()) {
+            this.adminActivities.userModel.setRowCount(0);
+            this.adminActivities.passModel.setRowCount(0);
+
+            this.adminActivities.dataUser = data.userMap;
+            for (String[] k : this.adminActivities.dataUser) {
+                this.adminActivities.userModel.addRow(k);
+            }
+            this.adminActivities.userModel.fireTableDataChanged();
+            this.adminActivities.userTable.revalidate();
+            this.adminActivities.repaint();
+        } else {
+            
+        }
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         userData data = (userData) arg;
@@ -79,10 +97,12 @@ public class diffieView extends JFrame implements Observer {
             if (!data.currentUser.getIsAdmin()) {
                 this.userActivitiesGUI.setVisible(true);
                 this.userActivitiesGUI.dataPass = data.passArrayList;
+                this.adminActivities.userModel.fireTableDataChanged();
                 this.started = true;
             } else {
-                this.adminActivities.dataPass = data.passArrayList;
-                this.adminActivities.dataUser = data.userMap;
+
+                updateTable(data);
+
                 this.started = true;
                 this.adminActivities.setVisible(true);
 

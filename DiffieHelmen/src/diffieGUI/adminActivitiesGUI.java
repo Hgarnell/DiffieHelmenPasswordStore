@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,8 +32,9 @@ public class adminActivitiesGUI extends JPanel {
     private JLabel jlabel, jlabel2, jlable3;
     public JButton add, remove, logout, delUser;
     private JScrollPane scrollPane, scrollPane2;
-    public String[][] dataPass;
-    public String[][] dataUser;
+    public String[][] dataPass, dataUser;
+    public String[] column, column2;
+    public DefaultTableModel userModel, passModel;
 
     public adminActivitiesGUI() {
         super();
@@ -43,17 +45,22 @@ public class adminActivitiesGUI extends JPanel {
         this.jlable3 = new JLabel("CTRL+CLICK to deselect a row");
         this.tablePanel = new JPanel();
         tablePanel.setLayout(new BoxLayout(this.tablePanel, BoxLayout.PAGE_AXIS));
-        String data2[][] = {{" ", " ", " "}, {" ", " ", " "}};
-        dataPass = data2;
-        String column[] = {"PASSID", "username", "password"};
 
+        dataPass = new String[1][3];
+        String columnPass[] = {"PASSID", "username", "password"};
+        column = columnPass;
+        this.passModel = new DefaultTableModel(dataPass, column);
+        this.passTable = new JTable(passModel);
+        this.passModel = new DefaultTableModel(dataPass, column);
         this.passTable = new JTable(dataPass, column);
         passTable.setBounds(30, 40, 100, 200);
         passTable.setDefaultEditor(Object.class, null);
-        dataUser = data2;
-        String column2[] = {"Admin?", "username"};
 
-        this.userTable = new JTable(dataUser, column2);
+        dataUser = new String[1][2];
+        String[] userColumns = {"Admin?", "username"};
+        column2 = userColumns;
+        this.userModel = new DefaultTableModel(dataUser, column2);
+        this.userTable = new JTable(userModel);
         userTable.setBounds(30, 40, 100, 200);
         userTable.setDefaultEditor(Object.class, null);
 
@@ -93,8 +100,6 @@ public class adminActivitiesGUI extends JPanel {
         this.setVisible(true);
 
     }
-
-   
 
     public static void main(String[] args) {
         adminActivitiesGUI k = new adminActivitiesGUI();
