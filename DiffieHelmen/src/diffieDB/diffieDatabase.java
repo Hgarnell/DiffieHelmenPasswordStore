@@ -80,7 +80,7 @@ public class diffieDatabase {
                     data.userMap = null;
                 }
                 System.out.println(tempUser.getUserKeys().checkKey(getBigInt(password)));
-                System.out.println(data.userMap.toString());
+               // System.out.println(data.userMap.toString());
                  if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
 
                     data.currentUser = tempUser;
@@ -189,7 +189,7 @@ public class diffieDatabase {
         try {
             Statement statement = conn.createStatement();
 
-            ResultSet rs = statement.executeQuery("SELECT username, isAdmin FROM Users ");
+            ResultSet rs = statement.executeQuery("SELECT username, isAdmin FROM Users");
             while(rs.next()) {
                 users.put(rs.getString("username"), rs.getBoolean("isAdmin"));
             }

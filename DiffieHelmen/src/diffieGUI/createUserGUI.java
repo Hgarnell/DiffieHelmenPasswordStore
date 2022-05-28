@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class createUserGUI extends JPanel implements ActionListener {
     public JButton jButton1;
     public JPasswordField jPasswordField1;
     public JTextField jUserField;
+    public JCheckBox checkAdmin;
 
     public createUserGUI() {
         super();
@@ -40,6 +42,7 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.jUserField = new JTextField();
         jUsername.setBounds(80, 10, 150, 20);
         jUserField.setBounds(80, 30, 100, 20);
+
         this.add(jUsername);
         this.add(jUserField);
         this.setVisible(true);
@@ -52,7 +55,12 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.add(jPassword);
         this.add(jPasswordField1);
         this.setVisible(true);
-
+        
+         //Adding a checkbox to check if admin or not
+        this.checkAdmin = new JCheckBox("Admin?");
+        this.checkAdmin.setBounds(80, 120, 100, 20);
+        this.add(checkAdmin);
+        
         //adding login button
         this.jButton1 = new JButton("Login");
         this.jButton1.setBounds(300, 130, 100, 20);

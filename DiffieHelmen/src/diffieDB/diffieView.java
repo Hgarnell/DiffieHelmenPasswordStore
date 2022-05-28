@@ -64,6 +64,7 @@ public class diffieView extends JFrame implements Observer {
         this.userActivitiesGUI.remove.addActionListener(listener);
         this.userActivitiesGUI.logout.addActionListener(listener);
 
+        this.createUserGUI.checkAdmin.addActionListener(listener);
         this.createUserGUI.jButton1.addActionListener(listener);
 
     }
@@ -81,7 +82,7 @@ public class diffieView extends JFrame implements Observer {
             this.adminActivities.userTable.revalidate();
             this.adminActivities.repaint();
         } else {
-            
+
         }
     }
 
@@ -101,19 +102,15 @@ public class diffieView extends JFrame implements Observer {
             } else {
 
                 updateTable(data);
-
                 this.started = true;
                 this.adminActivities.setVisible(true);
 
             }
-        }// else if (dataPass.quitFlag) {
-//            this.quitGame(dataPass.currentScore);
-//        } else {
+        } else  {
+          
+
+        }}}
+       
 //            this.setQuestion(dataPass.num1, dataPass.num2);
 //        }
-    }
-
-    void genUserStart() {
-    }
-
-}
+        
