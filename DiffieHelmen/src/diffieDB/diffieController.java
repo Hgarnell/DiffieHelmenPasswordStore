@@ -34,6 +34,10 @@ public class diffieController implements ActionListener {
 
         //admin activity gui listeners
         if (source == this.view.adminActivities.add) {
+            System.out.println("Add Password CLicked");
+            this.view.passwordGUI.setVisible(true);
+            this.view.userActivitiesGUI.setVisible(false);
+            this.view.repaint();
         } else if (source == this.view.adminActivities.delUser) {
             System.out.println("Del User clicked");
             int column = 1;
@@ -53,16 +57,15 @@ public class diffieController implements ActionListener {
         } else if (source == this.view.adminActivities.remove) {
         } //user activity gui listeners               
         else if (source == this.view.userActivitiesGUI.add) {
-            System.out.println("create logout  pressed");
-            this.view.entryGUI.setVisible(true);
+            System.out.println("Add Password CLicked");
+            this.view.passwordGUI.setVisible(true);
             this.view.userActivitiesGUI.setVisible(false);
             this.view.repaint();
         } else if (source == this.view.userActivitiesGUI.remove) {
         } else if (source == this.view.userActivitiesGUI.logout) {
             this.view.entryGUI.setVisible(true);
-            this.view.userActivitiesGUI.setVisible(true);
+            this.view.userActivitiesGUI.setVisible(false);
             this.model.quitGame();
-
         } // entry gui listeners
         else if (source == this.view.entryGUI.createUserOpt) {
             System.out.println("create User option pressed");
@@ -99,7 +102,7 @@ public class diffieController implements ActionListener {
             this.view.createUserGUI.setVisible(false);
             this.view.repaint();
             String username = this.view.createUserGUI.jUserField.getText();
-            this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(),  this.view.createUserGUI.checkAdmin.isSelected());
+            this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected());
 
         }
 

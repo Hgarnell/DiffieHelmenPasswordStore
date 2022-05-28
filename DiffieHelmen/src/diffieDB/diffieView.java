@@ -42,6 +42,10 @@ public class diffieView extends JFrame implements Observer {
 
         this.add(adminActivities);
         this.adminActivities.setVisible(false);
+
+        this.add(passwordGUI);
+        this.passwordGUI.setVisible(false);
+
         this.setVisible(true);
 
     }
@@ -106,11 +110,12 @@ public class diffieView extends JFrame implements Observer {
                 this.adminActivities.setVisible(true);
 
             }
-        } else  {
-          
+        } else {
 
-        }}}
-       
+        }
+    }
+}
+
 //            this.setQuestion(dataPass.num1, dataPass.num2);
 //        }
-        
+
