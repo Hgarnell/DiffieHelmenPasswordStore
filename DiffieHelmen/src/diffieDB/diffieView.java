@@ -78,7 +78,6 @@ public class diffieView extends JFrame implements Observer {
             for (String[] k : this.adminActivities.dataUser) {
                 this.adminActivities.userModel.addRow(k);
             }
-            this.adminActivities.userModel.fireTableDataChanged();
             this.adminActivities.userTable.revalidate();
             this.adminActivities.repaint();
         } else {

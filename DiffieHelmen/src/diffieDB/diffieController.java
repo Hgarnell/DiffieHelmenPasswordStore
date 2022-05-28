@@ -35,9 +35,15 @@ public class diffieController implements ActionListener {
         //admin activity gui listeners
         if (source == this.view.adminActivities.add) {
         } else if (source == this.view.adminActivities.delUser) {
+            System.out.println("Del User clicked");
             int column = 1;
             int row = this.view.adminActivities.userTable.getSelectedRow();
-            this.model.removeUser(this.view.adminActivities.userTable.getValueAt(column, row).toString());
+            System.out.println(row);
+            System.out.println(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+            this.model.removeUser(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+            this.view.updateTable(this.model.data);
+            this.view.repaint();
+
         } else if (source == this.view.adminActivities.logout) {
             System.out.println("create logout  pressed");
             this.view.entryGUI.setVisible(true);

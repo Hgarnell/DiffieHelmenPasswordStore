@@ -145,11 +145,14 @@ public class diffieDatabase {
     boolean removeUser(String k) {
 
         try {
+            System.out.println("REMOVE USER");
+            System.out.println(k);
             Statement statement = conn.createStatement();
-            statement.executeUpdate("DELETE FROM Users WHERE username ='" + k + "';");
-            statement.executeUpdate("DELETE FROM Passwords WHERE username ='" + k + "';");
+            statement.executeUpdate("DELETE FROM Users WHERE username = '" + k + "'");
+            statement.executeUpdate("DELETE FROM Passwords WHERE username = '" + k + "'");
             return true;
         } catch (SQLException ex) {
+            System.out.println(ex);
         }
 
         return false;

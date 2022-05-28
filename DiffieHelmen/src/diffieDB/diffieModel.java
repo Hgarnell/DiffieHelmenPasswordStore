@@ -59,10 +59,12 @@ public class diffieModel extends Observable {
     public boolean removeUser(String username) {
 
         if (this.db.removeUser(username)) {
+            this.data.userMap = this.db.getUserList();
             this.setChanged();
             this.notifyObservers(this.data);
             return true;
         }
+        
         return false;
 
     }
