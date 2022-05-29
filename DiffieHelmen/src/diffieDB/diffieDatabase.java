@@ -165,11 +165,9 @@ public class diffieDatabase {
 
             ResultSet rs = statement.executeQuery("SELECT passID, passUser  ,Pass FROM Password "
                     + "WHERE username = '" + user.getUsername() + "'");
-            if (rs.next()) {
+            while (rs.next()) {
                 passwords.add(new Password(rs.getString("passID"), rs.getString("passUser"), rs.getString("Pass")));
-            } else {
-                System.out.println("User Has no Passwords");
-            }
+            } 
         } catch (SQLException ex) {
         }
 
@@ -207,14 +205,17 @@ public class diffieDatabase {
         return userArray;
     }
 
-    void removePassword(String string, String username) {
-
+    boolean removePassword(String string, String username) {
+        System.out.println("db remove pass entered");
         try {
             Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "'");
-
+            return true;
         } catch (SQLException ex) {
+            System.out.println(ex);
             System.out.println("Check that pass ID Matches.......");
+                        return false;
+
         }
 
     }

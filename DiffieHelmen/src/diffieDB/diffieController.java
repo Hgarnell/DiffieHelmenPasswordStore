@@ -55,6 +55,11 @@ public class diffieController implements ActionListener {
             this.model.quitGame();
             this.view.repaint();
         } else if (source == this.view.adminActivities.remove) {
+            System.out.println("Del Pass clicked");
+            Object output = this.view.adminActivities.passModel.getValueAt(this.view.adminActivities.passTable.getSelectedRow(), 0);
+            this.model.removePassword((output != null)? output.toString() : "null" );
+            this.view.updateTable(this.model.data);
+            this.view.repaint();
         } //user activity gui listeners               
         else if (source == this.view.userActivitiesGUI.add) {
             System.out.println("Add Password CLicked");
@@ -113,15 +118,11 @@ public class diffieController implements ActionListener {
                 this.view.adminActivities.setVisible(true);
                 this.view.passwordGUI.setVisible(false);
 
-            }
-            else
-            {
+            } else {
                 this.view.userActivitiesGUI.setVisible(true);
                 this.view.passwordGUI.setVisible(false);
             }
         }
-        
-        
 
 //            case ():
 //                String username = this.view.unInput.getText();
@@ -137,8 +138,8 @@ public class diffieController implements ActionListener {
 //            default:
 //                break;
     }
-    
-   public boolean userIsAdmin(){
-      return this.model.data.currentUser.getIsAdmin();
-   }
+
+    public boolean userIsAdmin() {
+        return this.model.data.currentUser.getIsAdmin();
+    }
 }

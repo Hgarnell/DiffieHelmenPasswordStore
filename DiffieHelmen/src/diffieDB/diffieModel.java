@@ -82,6 +82,19 @@ public class diffieModel extends Observable {
         return false;
 
     }
+    
+     public boolean removePassword(String passID) {
+
+        if (this.db.removePassword(passID,data.currentUser.getUsername())) {
+            this.data.passArrayList = this.db.getPasswords(data.currentUser);
+            this.setChanged();
+            this.notifyObservers(this.data);
+            return true;
+        }
+
+        return false;
+
+    }
 
     public void quitGame() {
         this.data.currentUser = null;
