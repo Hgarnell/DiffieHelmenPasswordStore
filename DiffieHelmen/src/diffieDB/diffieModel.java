@@ -32,9 +32,6 @@ public class diffieModel extends Observable {
         this.setChanged();
         this.notifyObservers(this.data);
     }
-    
-    
-    
 
     public boolean addUser(String username, String secret, Boolean isAdmin) {
 
@@ -56,6 +53,23 @@ public class diffieModel extends Observable {
         }
     }
 
+    public boolean addPass(User user, String passID, String passUsername, String password) {
+
+        System.out.println("addPass notified");
+        Password newPass = new Password(passID, passUsername, password);
+
+        if (this.db.addPassword(newPass, user.getUsername())) {
+            System.out.println("added succesfully");
+             this.data.passArrayList = this.db.getPasswords(user);
+            this.setChanged();
+            this.notifyObservers(this.data);
+            return true;
+
+        }
+        return false;
+
+    }
+
     public boolean removeUser(String username) {
 
         if (this.db.removeUser(username)) {
@@ -64,7 +78,7 @@ public class diffieModel extends Observable {
             this.notifyObservers(this.data);
             return true;
         }
-        
+
         return false;
 
     }

@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -47,6 +48,7 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
         this.jTable1 = new JTable(dataPass, column);
         jTable1.setBounds(30, 40, 200, 300);
         jTable1.setDefaultEditor(Object.class, null);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.scrollPane = new JScrollPane(jTable1);
         this.scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));

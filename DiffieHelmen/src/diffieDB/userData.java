@@ -20,7 +20,6 @@ public class userData {
     User currentUser = null;
     String[][] passArrayList;
     String[][] userMap;
-    JTable passTableData;
-    JTable userTableData;
+   
 
 }

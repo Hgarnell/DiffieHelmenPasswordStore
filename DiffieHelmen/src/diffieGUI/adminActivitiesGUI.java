@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,9 +52,8 @@ public class adminActivitiesGUI extends JPanel {
         column = columnPass;
         this.passModel = new DefaultTableModel(dataPass, column);
         this.passTable = new JTable(passModel);
-        this.passModel = new DefaultTableModel(dataPass, column);
-        this.passTable = new JTable(dataPass, column);
         passTable.setBounds(30, 40, 100, 200);
+        passTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         passTable.setDefaultEditor(Object.class, null);
 
         dataUser = new String[1][2];
@@ -63,6 +63,7 @@ public class adminActivitiesGUI extends JPanel {
         this.userTable = new JTable(userModel);
         userTable.setBounds(30, 40, 100, 200);
         userTable.setDefaultEditor(Object.class, null);
+        userTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.scrollPane2 = new JScrollPane(userTable);
         this.scrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK));

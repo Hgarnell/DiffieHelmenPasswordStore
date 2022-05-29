@@ -23,11 +23,12 @@ public class passwordGUI extends JPanel implements ActionListener {
 
     private JLabel jPassId, jUsername, jPassword, jError, jInfo;
     public JButton jButton1;
-    private JPasswordField jPasswordField1;
-    private JTextField jUserField, jPassIdField;
+    public JPasswordField jPasswordField1;
+    public JTextField jUserField, jPassIdField;
     private JFrame frame;
     private String passInfoString;
     private JOptionPane confirmPass;
+    
     public passwordGUI() {
         super();
         super.setLayout(null);

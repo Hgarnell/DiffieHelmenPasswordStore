@@ -78,12 +78,22 @@ public class diffieView extends JFrame implements Observer {
         if (data.currentUser.getIsAdmin()) {
             this.adminActivities.userModel.setRowCount(0);
             this.adminActivities.passModel.setRowCount(0);
+            this.adminActivities.dataPass = data.passArrayList;
 
             this.adminActivities.dataUser = data.userMap;
             for (String[] k : this.adminActivities.dataUser) {
                 this.adminActivities.userModel.addRow(k);
             }
+
+            for (String[] j : this.adminActivities.dataPass) {
+                this.adminActivities.passModel.addRow(j);
+            }
+            this.adminActivities.passModel.fireTableDataChanged();
+            this.adminActivities.userModel.fireTableDataChanged();
+
             this.adminActivities.userTable.revalidate();
+            this.adminActivities.passTable.revalidate();
+
             this.adminActivities.repaint();
         } else {
 

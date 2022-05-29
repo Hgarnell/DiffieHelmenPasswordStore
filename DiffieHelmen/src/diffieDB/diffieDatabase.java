@@ -80,12 +80,12 @@ public class diffieDatabase {
                     data.userMap = null;
                 }
                 System.out.println(tempUser.getUserKeys().checkKey(getBigInt(password)));
-               // System.out.println(data.userMap.toString());
-                 if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
+                // System.out.println(data.userMap.toString());
+                if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
 
                     data.currentUser = tempUser;
                     data.passArrayList = getPasswords(tempUser);
-                    data.userMap  = getUserList();
+                    data.userMap = getUserList();
                     data.loginFlag = true;
                 } else {
                     data.loginFlag = false;
@@ -190,7 +190,7 @@ public class diffieDatabase {
             Statement statement = conn.createStatement();
 
             ResultSet rs = statement.executeQuery("SELECT username, isAdmin FROM Users");
-            while(rs.next()) {
+            while (rs.next()) {
                 users.put(rs.getString("username"), rs.getBoolean("isAdmin"));
             }
         } catch (SQLException ex) {
@@ -211,7 +211,7 @@ public class diffieDatabase {
 
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "';");
+            statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "'");
 
         } catch (SQLException ex) {
             System.out.println("Check that pass ID Matches.......");
@@ -219,17 +219,17 @@ public class diffieDatabase {
 
     }
 
-    void addPassword(Password password, String username) {
-
+    boolean addPassword(Password password, String username) {
+        System.out.println("entered add Password");
         try {
             Statement statement = conn.createStatement();
             statement.executeUpdate("INSERT INTO Password "
                     + "VALUES('" + username + "','" + password.getPassId() + "', '" + password.getUsername() + "', '" + password.getPassword() + "')");
-
+            return true;
         } catch (SQLException ex) {
             System.out.println("Check that pass ID Matches.......");
         }
-
+        return false;
     }
 
 }

@@ -36,7 +36,7 @@ public class diffieController implements ActionListener {
         if (source == this.view.adminActivities.add) {
             System.out.println("Add Password CLicked");
             this.view.passwordGUI.setVisible(true);
-            this.view.userActivitiesGUI.setVisible(false);
+            this.view.adminActivities.setVisible(false);
             this.view.repaint();
         } else if (source == this.view.adminActivities.delUser) {
             System.out.println("Del User clicked");
@@ -104,7 +104,24 @@ public class diffieController implements ActionListener {
             String username = this.view.createUserGUI.jUserField.getText();
             this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected());
 
+        } else if (source == this.view.passwordGUI.jButton1) {
+            System.out.println("create Password option pressed");
+
+            this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText());
+            this.view.repaint();
+            if (userIsAdmin()) {
+                this.view.adminActivities.setVisible(true);
+                this.view.passwordGUI.setVisible(false);
+
+            }
+            else
+            {
+                this.view.userActivitiesGUI.setVisible(true);
+                this.view.passwordGUI.setVisible(false);
+            }
         }
+        
+        
 
 //            case ():
 //                String username = this.view.unInput.getText();
@@ -120,4 +137,8 @@ public class diffieController implements ActionListener {
 //            default:
 //                break;
     }
+    
+   public boolean userIsAdmin(){
+      return this.model.data.currentUser.getIsAdmin();
+   }
 }
