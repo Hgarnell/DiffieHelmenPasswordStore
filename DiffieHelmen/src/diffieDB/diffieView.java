@@ -6,6 +6,7 @@ package diffieDB;
 
 import diffieGUI.*;
 import DiffieHelmen.*;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,7 +31,8 @@ public class diffieView extends JFrame implements Observer {
 
     public diffieView() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 600);
+        this.setPreferredSize(new Dimension(600, 500));
+        this.pack();
         this.add(entryGUI);
         this.add(loginGUI);
         this.loginGUI.setVisible(false);
@@ -55,9 +57,11 @@ public class diffieView extends JFrame implements Observer {
         this.entryGUI.createUserOpt.addActionListener(listener);
         this.entryGUI.loginOpt.addActionListener(listener);
 
-        this.loginGUI.jButton1.addActionListener(listener);
+        this.loginGUI.loginButton.addActionListener(listener);
+        this.loginGUI.backButton.addActionListener(listener);
 
-        this.passwordGUI.jButton1.addActionListener(listener);
+        this.passwordGUI.createPassButton.addActionListener(listener);
+        this.passwordGUI.backButton.addActionListener(listener);
 
         this.adminActivities.delUser.addActionListener(listener);
         this.adminActivities.add.addActionListener(listener);
@@ -69,8 +73,8 @@ public class diffieView extends JFrame implements Observer {
         this.userActivitiesGUI.logout.addActionListener(listener);
 
         this.createUserGUI.checkAdmin.addActionListener(listener);
-        this.createUserGUI.jButton1.addActionListener(listener);
-
+        this.createUserGUI.createButton.addActionListener(listener);
+        this.createUserGUI.backButton.addActionListener(listener);
     }
 
     public void updateTable(userData data) {

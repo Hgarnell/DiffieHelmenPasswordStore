@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 public class passwordGUI extends JPanel implements ActionListener {
 
     public JLabel jPassId, jUsername, jPassword, jError, jInfo;
-    public JButton jButton1;
+    public JButton createPassButton,backButton;
     public JPasswordField jPasswordField1;
     public JTextField jUserField, jPassIdField;
     private JFrame frame;
@@ -61,10 +61,15 @@ public class passwordGUI extends JPanel implements ActionListener {
         this.add(jPassIdField);
 
         //adding login button
-        this.jButton1 = new JButton("Create password");
-        this.jButton1.setBounds(300, 130, 140, 20);
-        this.add(jButton1);
+        this.createPassButton = new JButton("Create password");
+        this.createPassButton.setBounds(300, 130, 140, 20);
+        this.add(createPassButton);
 
+         //adding Back button
+        this.backButton = new JButton("<- Go Back");
+        this.backButton.setBounds(300, 0, 100, 20);
+        this.add(backButton);
+        
         this.passInfoString = "<html>PassID: an identifier for you to remember the password<br><br>Username: your username<br><br>Password: your password</html>";
         //formating the information message
         this.jInfo = new JLabel(passInfoString);

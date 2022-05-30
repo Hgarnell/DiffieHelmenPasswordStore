@@ -107,7 +107,7 @@ public class diffieController implements ActionListener {
 
             this.view.repaint();
         } //login gui listeners
-        else if (source == this.view.loginGUI.jButton1) {
+        else if (source == this.view.loginGUI.loginButton) {
             try {
                 System.out.println("Login User option pressed");
                 System.out.println(this.view.loginGUI.jUserField.getText());
@@ -137,7 +137,7 @@ public class diffieController implements ActionListener {
             }
 
         } //create user gui listeners
-        else if (source == this.view.createUserGUI.jButton1) {
+        else if (source == this.view.createUserGUI.createButton) {
             System.out.println("create User option pressed");
 
             String username = this.view.createUserGUI.jUserField.getText();
@@ -151,7 +151,7 @@ public class diffieController implements ActionListener {
                 this.view.createUserGUI.jInfo.setVisible(false);
                 this.view.createUserGUI.errorMessage.setVisible(true);
             }
-        } else if (source == this.view.passwordGUI.jButton1) {
+        } else if (source == this.view.passwordGUI.createPassButton) {
 
             System.out.println("create Password option pressed");
 
@@ -171,6 +171,30 @@ public class diffieController implements ActionListener {
                 this.view.passwordGUI.jError.setVisible(true);
                 //refreshFields();
             }
+
+        } else if (source == this.view.passwordGUI.backButton) {
+
+            System.out.println("Back Password option pressed");
+            if (userIsAdmin()) {
+                this.view.adminActivities.setVisible(true);
+
+            } else {
+                this.view.userActivitiesGUI.setVisible(true);
+            }
+            this.view.repaint();
+        } else if (source == this.view.createUserGUI.backButton) {
+
+            System.out.println("Back Password option pressed");
+            refreshFields();
+            this.view.createUserGUI.setVisible(false);
+            this.view.entryGUI.setVisible(true);
+            this.view.repaint();
+        } else if (source == this.view.loginGUI.backButton) {
+
+            System.out.println("Back Password option pressed");
+            this.view.loginGUI.setVisible(false);
+            this.view.entryGUI.setVisible(true);
+            this.view.repaint();
         }
 
 //            case ():

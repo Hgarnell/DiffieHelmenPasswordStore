@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 public class createUserGUI extends JPanel implements ActionListener {
 
     public JLabel jUsername, jPassword, jInfo, errorMessage;
-    public JButton jButton1;
+    public JButton createButton,backButton;
     public JPasswordField jPasswordField1;
     public JTextField jUserField;
     public JCheckBox checkAdmin;
@@ -62,11 +62,18 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.add(checkAdmin);
 
         //adding login button
-        this.jButton1 = new JButton("Create");
-        this.jButton1.setBounds(300, 130, 100, 20);
-        this.add(jButton1);
+        this.createButton = new JButton("Create");
+        this.createButton.setBounds(300, 130, 100, 20);
+        this.add(createButton);
         this.setVisible(true);
 
+        
+        //adding Back button
+        this.backButton = new JButton("<- Go Back");
+        this.backButton.setBounds(300, 0, 100, 20);
+        this.add(backButton);
+        this.setVisible(true);
+        
         //formating the errormessage
         this.errorMessage = new JLabel("<html>Ensure all fields are filled, and that your pin number is a 4 digit integer.</html>");
         errorMessage.setForeground(Color.red);
@@ -90,7 +97,7 @@ public class createUserGUI extends JPanel implements ActionListener {
 
         String inputUsername = jUserField.getText();
         String inputPassword = jPasswordField1.getText();
-        if (source == jButton1) {
+        if (source == createButton) {
             //test parameters
             if (inputUsername.equals("")) {
                 this.jInfo.setVisible(true);

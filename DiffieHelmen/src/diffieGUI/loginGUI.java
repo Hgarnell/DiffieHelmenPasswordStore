@@ -19,13 +19,13 @@ import javax.swing.JTextField;
  *
  * @author hanna
  */
-public class loginGUI extends JPanel  {
+public class loginGUI extends JPanel {
 
     public JLabel jUsername;
 
     public JLabel jPassword;
     public JLabel jError;
-    public JButton jButton1;
+    public JButton loginButton,backButton;
     public JPasswordField jPasswordField1;
     public JTextField jUserField;
 
@@ -54,11 +54,15 @@ public class loginGUI extends JPanel  {
         this.setVisible(true);
 
         //adding login button
-        this.jButton1 = new JButton("Login");
-        this.jButton1.setBounds(300, 130, 100, 20);
-        this.add(jButton1);
+        this.loginButton = new JButton("Login");
+        this.loginButton.setBounds(300, 130, 100, 20);
+        this.add(loginButton);
         this.setVisible(true);
-
+        
+//adding Back button
+        this.backButton = new JButton("<- Go Back");
+        this.backButton.setBounds(300, 0, 100, 20);
+        this.add(backButton);
         //formating the errormessage
         this.jError = new JLabel("<html>Incorrect Username or Password</html>");
         jError.setForeground(Color.red);
@@ -70,7 +74,6 @@ public class loginGUI extends JPanel  {
     }
 
 //      
-
     public static void main(String[] args) {
         loginGUI login = new loginGUI();
         //   login.setFrame(this.frame);
