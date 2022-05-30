@@ -177,7 +177,7 @@ public class diffieDatabase {
             passArray[k][0] = p.getPassId();
             passArray[k][1] = p.getUsername();
             passArray[k][2] = p.getPassword();
-
+            k++;
         }
         return passArray;
     }

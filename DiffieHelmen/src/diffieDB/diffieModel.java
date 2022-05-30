@@ -17,7 +17,6 @@ public class diffieModel extends Observable {
 
     public diffieDatabase db;
     public userData data;
-    public User user, adding, removing;
     public Password addPass, remPass;
 
     public diffieModel() {
@@ -60,7 +59,7 @@ public class diffieModel extends Observable {
 
         if (this.db.addPassword(newPass, user.getUsername())) {
             System.out.println("added succesfully");
-             this.data.passArrayList = this.db.getPasswords(user);
+            this.data.passArrayList = this.db.getPasswords(user);
             this.setChanged();
             this.notifyObservers(this.data);
             return true;
@@ -82,10 +81,10 @@ public class diffieModel extends Observable {
         return false;
 
     }
-    
-     public boolean removePassword(String passID) {
 
-        if (this.db.removePassword(passID,data.currentUser.getUsername())) {
+    public boolean removePassword(String passID) {
+
+        if (this.db.removePassword(passID, data.currentUser.getUsername())) {
             this.data.passArrayList = this.db.getPasswords(data.currentUser);
             this.setChanged();
             this.notifyObservers(this.data);
@@ -93,6 +92,15 @@ public class diffieModel extends Observable {
         }
 
         return false;
+
+    }
+
+    public void updateTables() {
+
+        this.data.passArrayList = this.db.getPasswords(data.currentUser);
+        this.data.userMap = this.db.getUserList();
+        this.setChanged();
+        this.notifyObservers(this.data);
 
     }
 

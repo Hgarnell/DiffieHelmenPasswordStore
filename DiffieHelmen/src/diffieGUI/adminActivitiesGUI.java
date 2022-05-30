@@ -47,7 +47,7 @@ public class adminActivitiesGUI extends JPanel {
         this.tablePanel = new JPanel();
         tablePanel.setLayout(new BoxLayout(this.tablePanel, BoxLayout.PAGE_AXIS));
 
-        dataPass = new String[1][3];
+        dataPass = new String[2][3];
         String columnPass[] = {"PASSID", "username", "password"};
         column = columnPass;
         this.passModel = new DefaultTableModel(dataPass, column);

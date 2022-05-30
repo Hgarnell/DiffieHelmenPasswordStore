@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,12 +28,12 @@ import javax.swing.border.EmptyBorder;
 public class userActivitiesGUI extends JPanel implements ActionListener {
 
     private JPanel buttonPanel;
-    private JTable jTable1;
+    public JTable passTable;
     private JLabel jlabel, jlabel2;
     public JButton add, remove, logout;
     private JScrollPane scrollPane;
     public String[][] dataPass;
-
+    public DefaultTableModel passModel;
     public userActivitiesGUI() {
         super();
         this.setSize(500, 250);
@@ -42,15 +43,15 @@ public class userActivitiesGUI extends JPanel implements ActionListener {
         this.add(jlabel, BorderLayout.NORTH);
         this.add(jlabel2, BorderLayout.SOUTH);
 
-       String data2[][] =   {{" "," "," "},{" "," "," "}};
-       dataPass =  data2;
-        String column[] = {"PASSID", "username", "password"};
-        this.jTable1 = new JTable(dataPass, column);
-        jTable1.setBounds(30, 40, 200, 300);
-        jTable1.setDefaultEditor(Object.class, null);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+       dataPass = new String[1][3];
+        String columnPass[] = {"PASSID", "username", "password"};
+        this.passModel = new DefaultTableModel(dataPass, columnPass);
+        this.passTable = new JTable(passModel);
+        passTable.setBounds(30, 40, 100, 200);
+        passTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        passTable.setDefaultEditor(Object.class, null);
 
-        this.scrollPane = new JScrollPane(jTable1);
+        this.scrollPane = new JScrollPane(passTable);
         this.scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
         this.add(scrollPane, BorderLayout.CENTER);
 

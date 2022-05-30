@@ -74,13 +74,13 @@ public class diffieView extends JFrame implements Observer {
     }
 
     public void updateTable(userData data) {
-
         if (data.currentUser.getIsAdmin()) {
             this.adminActivities.userModel.setRowCount(0);
             this.adminActivities.passModel.setRowCount(0);
-            this.adminActivities.dataPass = data.passArrayList;
 
+            this.adminActivities.dataPass = data.passArrayList;
             this.adminActivities.dataUser = data.userMap;
+
             for (String[] k : this.adminActivities.dataUser) {
                 this.adminActivities.userModel.addRow(k);
             }
@@ -96,7 +96,18 @@ public class diffieView extends JFrame implements Observer {
 
             this.adminActivities.repaint();
         } else {
+            this.userActivitiesGUI.passModel.setRowCount(0);
+            this.userActivitiesGUI.dataPass = data.passArrayList;
 
+
+            for (String[] j : this.userActivitiesGUI.dataPass) {
+                this.userActivitiesGUI.passModel.addRow(j);
+            }
+            this.userActivitiesGUI.passModel.fireTableDataChanged();
+
+            this.userActivitiesGUI.passTable.revalidate();
+
+            this.userActivitiesGUI.repaint();
         }
     }
 
@@ -107,13 +118,13 @@ public class diffieView extends JFrame implements Observer {
             this.loginGUI.jError.setVisible(true);
 
         } else if (data.loginFlag) {
-            
+
             this.loginGUI.setVisible(false);
             if (!data.currentUser.getIsAdmin()) {
-                this.userActivitiesGUI.setVisible(true);
-                this.userActivitiesGUI.dataPass = data.passArrayList;
-                this.adminActivities.userModel.fireTableDataChanged();
+                updateTable(data);
                 this.started = true;
+                this.userActivitiesGUI.setVisible(true);
+
             } else {
 
                 updateTable(data);

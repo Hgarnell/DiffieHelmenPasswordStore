@@ -37,6 +37,9 @@ public class diffieController implements ActionListener {
             System.out.println("Add Password CLicked");
             this.view.passwordGUI.setVisible(true);
             this.view.adminActivities.setVisible(false);
+            this.model.updateTables();
+
+            this.view.updateTable(this.model.data);
             this.view.repaint();
         } else if (source == this.view.adminActivities.delUser) {
             System.out.println("Del User clicked");
@@ -45,28 +48,41 @@ public class diffieController implements ActionListener {
             System.out.println(row);
             System.out.println(this.view.adminActivities.userModel.getValueAt(row, column).toString());
             this.model.removeUser(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+            this.model.updateTables();
+
             this.view.updateTable(this.model.data);
             this.view.repaint();
 
+        } else if (source == this.view.adminActivities.remove) {
+            System.out.println("Del Pass clicked");
+            Object output = this.view.adminActivities.passModel.getValueAt(this.view.adminActivities.passTable.getSelectedRow(), 0);
+            this.model.removePassword((output != null) ? output.toString() : "null");
+            this.view.updateTable(this.model.data);
+            this.view.repaint();
         } else if (source == this.view.adminActivities.logout) {
             System.out.println("create logout  pressed");
             this.view.entryGUI.setVisible(true);
             this.view.adminActivities.setVisible(false);
             this.model.quitGame();
             this.view.repaint();
-        } else if (source == this.view.adminActivities.remove) {
-            System.out.println("Del Pass clicked");
-            Object output = this.view.adminActivities.passModel.getValueAt(this.view.adminActivities.passTable.getSelectedRow(), 0);
-            this.model.removePassword((output != null)? output.toString() : "null" );
-            this.view.updateTable(this.model.data);
-            this.view.repaint();
-        } //user activity gui listeners               
+        } //user activity gui listeners 
+        //add Password
         else if (source == this.view.userActivitiesGUI.add) {
             System.out.println("Add Password CLicked");
             this.view.passwordGUI.setVisible(true);
             this.view.userActivitiesGUI.setVisible(false);
+            this.model.updateTables();
+
+            this.view.updateTable(this.model.data);
             this.view.repaint();
-        } else if (source == this.view.userActivitiesGUI.remove) {
+        } //Delete Password
+        else if (source == this.view.userActivitiesGUI.remove) {
+            System.out.println("Del Pass clicked");
+            Object output = this.view.userActivitiesGUI.passModel.getValueAt(this.view.userActivitiesGUI.passTable.getSelectedRow(), 0);
+            this.model.removePassword((output != null) ? output.toString() : "null");
+            this.model.updateTables();
+            this.view.updateTable(this.model.data);
+            this.view.repaint();
         } else if (source == this.view.userActivitiesGUI.logout) {
             this.view.entryGUI.setVisible(true);
             this.view.userActivitiesGUI.setVisible(false);
