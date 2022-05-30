@@ -149,7 +149,7 @@ public class diffieDatabase {
             System.out.println(k);
             Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Users WHERE username = '" + k + "'");
-            statement.executeUpdate("DELETE FROM Passwords WHERE username = '" + k + "'");
+            statement.executeUpdate("DELETE FROM Password WHERE username = '" + k + "'");
             return true;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -167,7 +167,7 @@ public class diffieDatabase {
                     + "WHERE username = '" + user.getUsername() + "'");
             while (rs.next()) {
                 passwords.add(new Password(rs.getString("passID"), rs.getString("passUser"), rs.getString("Pass")));
-            } 
+            }
         } catch (SQLException ex) {
         }
 
@@ -214,7 +214,7 @@ public class diffieDatabase {
         } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("Check that pass ID Matches.......");
-                        return false;
+            return false;
 
         }
 
@@ -224,10 +224,17 @@ public class diffieDatabase {
         System.out.println("entered add Password");
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO Password "
-                    + "VALUES('" + username + "','" + password.getPassId() + "', '" + password.getUsername() + "', '" + password.getPassword() + "')");
-            return true;
+            ResultSet rs = statement.executeQuery("SELECT passID FROM Password WHERE passID ='" + password.getPassId() + "'");
+
+            if (!rs.next()) {
+                statement.executeUpdate("INSERT INTO Password "
+                        + "VALUES('" + username + "','" + password.getPassId() + "', '" + password.getUsername() + "', '" + password.getPassword() + "')");
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
+            System.out.println(ex);
             System.out.println("Check that pass ID Matches.......");
         }
         return false;

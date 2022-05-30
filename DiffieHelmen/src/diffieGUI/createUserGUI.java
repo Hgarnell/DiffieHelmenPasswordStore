@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  */
 public class createUserGUI extends JPanel implements ActionListener {
 
-    private JLabel jUsername, jPassword, jErrorNull, jErrorPin;
+    public JLabel jUsername, jPassword, jInfo, errorMessage;
     public JButton jButton1;
     public JPasswordField jPasswordField1;
     public JTextField jUserField;
@@ -55,36 +55,37 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.add(jPassword);
         this.add(jPasswordField1);
         this.setVisible(true);
-        
-         //Adding a checkbox to check if admin or not
+
+        //Adding a checkbox to check if admin or not
         this.checkAdmin = new JCheckBox("Admin?");
         this.checkAdmin.setBounds(80, 120, 100, 20);
         this.add(checkAdmin);
-        
+
         //adding login button
-        this.jButton1 = new JButton("Login");
+        this.jButton1 = new JButton("Create");
         this.jButton1.setBounds(300, 130, 100, 20);
         this.add(jButton1);
         this.setVisible(true);
 
         //formating the errormessage
-        this.jErrorPin = new JLabel("PIN NOT OKAY");
-        jErrorPin.setForeground(Color.red);
-        this.jErrorPin.setBounds(300, 40, 100, 20);
-        jErrorPin.setVisible(false);
-        this.add(jErrorPin);
-
-        this.jErrorNull = new JLabel("FIELDNULL");
-        jErrorNull.setForeground(Color.red);
-        this.jErrorNull.setBounds(300, 40, 100, 20);
-        jErrorNull.setVisible(false);
-        this.add(jErrorNull);
+        this.errorMessage = new JLabel("<html>Ensure all fields are filled, and that your pin number is a 4 digit integer.</html>");
+        errorMessage.setForeground(Color.red);
+        this.errorMessage.setBounds(250,10, 250, 100);
+        errorMessage.setVisible(false);
+        this.add(errorMessage);
+        
+        String userInfoString = "<html>Your username can be anything you want, however make it something you can remember<br> Your pin number must be a 4 digit integer</html>";
+        this.jInfo = new JLabel(userInfoString);
+        jInfo.setForeground(Color.black);
+        this.jInfo.setBounds(250, 10, 250, 100);
+        jInfo.setVisible(true);
+        this.add(jInfo);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.jErrorPin.setVisible(false);
-        this.jErrorNull.setVisible(false);
+        this.errorMessage.setVisible(false);
+        this.jInfo.setVisible(false);
         Object source = e.getSource();
 
         String inputUsername = jUserField.getText();
@@ -92,11 +93,11 @@ public class createUserGUI extends JPanel implements ActionListener {
         if (source == jButton1) {
             //test parameters
             if (inputUsername.equals("")) {
-                this.jErrorNull.setVisible(true);
+                this.jInfo.setVisible(true);
                 this.setVisible(true);
 
             } else if (!(Pattern.matches("\\d{4}", inputPassword))) {
-                this.jErrorPin.setVisible(true);
+                this.errorMessage.setVisible(true);
                 this.setVisible(true);
             } else {
 

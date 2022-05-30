@@ -21,14 +21,14 @@ import javax.swing.JTextField;
  */
 public class passwordGUI extends JPanel implements ActionListener {
 
-    private JLabel jPassId, jUsername, jPassword, jError, jInfo;
+    public JLabel jPassId, jUsername, jPassword, jError, jInfo;
     public JButton jButton1;
     public JPasswordField jPasswordField1;
     public JTextField jUserField, jPassIdField;
     private JFrame frame;
     private String passInfoString;
     private JOptionPane confirmPass;
-    
+
     public passwordGUI() {
         super();
         super.setLayout(null);
@@ -72,10 +72,19 @@ public class passwordGUI extends JPanel implements ActionListener {
         this.jInfo.setBounds(200, 5, 250, 100);
         this.add(jInfo);
         //this.setVisible(true);
+
+        this.jError = new JLabel(passInfoString);
+        this.jError.setText("<html>Please Ensure that all Fields are filled out or that PassID is unique</html>");
+        jError.setForeground(Color.red);
+        this.jError.setVisible(false);
+        this.jError.setBounds(200, 5, 250, 100);
+        this.add(jError);
+
         this.setVisible(true);
 
     }
 
+  
     @Override
     public void actionPerformed(ActionEvent e) {
         String inputUsername = jUserField.getText();
@@ -91,7 +100,7 @@ public class passwordGUI extends JPanel implements ActionListener {
             jInfo.setForeground(Color.BLACK);
 
             this.jInfo.setText(passInfoString);
-            int n = JOptionPane.showConfirmDialog(this,"Confirm Password Create");
+            int n = JOptionPane.showConfirmDialog(this, "Confirm Password Create");
         }
 
     }

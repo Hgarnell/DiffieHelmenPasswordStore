@@ -99,7 +99,6 @@ public class diffieView extends JFrame implements Observer {
             this.userActivitiesGUI.passModel.setRowCount(0);
             this.userActivitiesGUI.dataPass = data.passArrayList;
 
-
             for (String[] j : this.userActivitiesGUI.dataPass) {
                 this.userActivitiesGUI.passModel.addRow(j);
             }
@@ -114,21 +113,23 @@ public class diffieView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         userData data = (userData) arg;
-       if (data.loginFlag) {
+        if (data != null) {
+            if (data.loginFlag) {
 
-            this.loginGUI.setVisible(false);
-            if (!data.currentUser.getIsAdmin()) {
-                updateTable(data);
-                this.started = true;
+                this.loginGUI.setVisible(false);
+                if (!data.currentUser.getIsAdmin()) {
+                    updateTable(data);
+                    this.started = true;
 
+                } else {
+
+                    updateTable(data);
+                    this.started = true;
+
+                }
             } else {
 
-                updateTable(data);
-                this.started = true;
-
             }
-        } else {
-
         }
     }
 }

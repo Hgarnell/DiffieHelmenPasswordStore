@@ -60,9 +60,9 @@ public class loginGUI extends JPanel  {
         this.setVisible(true);
 
         //formating the errormessage
-        this.jError = new JLabel("Incorrect Username or Password");
+        this.jError = new JLabel("<html>Incorrect Username or Password</html>");
         jError.setForeground(Color.red);
-        this.jError.setBounds(300, 40, 100, 20);
+        this.jError.setBounds(200, 5, 250, 100);
         jError.setVisible(false);
         this.add(jError);
         //this.setVisible(true);

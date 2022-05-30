@@ -138,27 +138,38 @@ public class diffieController implements ActionListener {
 
         } //create user gui listeners
         else if (source == this.view.createUserGUI.jButton1) {
-            setGuiVisFalse();
             System.out.println("create User option pressed");
-            this.view.entryGUI.setVisible(true);
-            this.view.repaint();
+
             String username = this.view.createUserGUI.jUserField.getText();
-            this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected());
-            refreshFields();
+            if (this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected())) {
+                setGuiVisFalse();
+                this.view.entryGUI.setVisible(true);
+                this.view.repaint();
+                refreshFields();
+
+            } else {
+                this.view.createUserGUI.jInfo.setVisible(false);
+                this.view.createUserGUI.errorMessage.setVisible(true);
+            }
         } else if (source == this.view.passwordGUI.jButton1) {
-            setGuiVisFalse();
 
             System.out.println("create Password option pressed");
 
-            this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText());
-            refreshFields();
+            if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText())) {
+                refreshFields();
+                setGuiVisFalse();
 
-            this.view.repaint();
-            if (userIsAdmin()) {
-                this.view.adminActivities.setVisible(true);
+                this.view.repaint();
+                if (userIsAdmin()) {
+                    this.view.adminActivities.setVisible(true);
 
+                } else {
+                    this.view.userActivitiesGUI.setVisible(true);
+                }
             } else {
-                this.view.userActivitiesGUI.setVisible(true);
+                this.view.passwordGUI.jInfo.setVisible(false);
+                this.view.passwordGUI.jError.setVisible(true);
+                //refreshFields();
             }
         }
 
@@ -197,13 +208,17 @@ public class diffieController implements ActionListener {
     public void refreshFields() {
         this.view.createUserGUI.jPasswordField1.setText("");
         this.view.createUserGUI.jUserField.setText("");
+        this.view.createUserGUI.errorMessage.setVisible(false);
+        this.view.createUserGUI.jInfo.setVisible(true);
         this.view.passwordGUI.jPasswordField1.setText("");
         this.view.passwordGUI.jPassIdField.setText("");
         this.view.passwordGUI.jUserField.setText("");
         this.view.loginGUI.jPasswordField1.setText("");
         this.view.loginGUI.jUserField.setText("");
-
+        this.view.passwordGUI.jInfo.setVisible(true);
+        this.view.passwordGUI.jError.setVisible(false);
         this.view.loginGUI.jError.setVisible(false);
+        this.view.createUserGUI.errorMessage.setVisible(false);
 
     }
 }
