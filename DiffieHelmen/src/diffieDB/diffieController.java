@@ -63,6 +63,8 @@ public class diffieController implements ActionListener {
             this.view.updateTable(this.model.data);
             this.view.repaint();
         } else if (source == this.view.adminActivities.logout) {
+            refreshFields();
+
             setGuiVisFalse();
             System.out.println("create logout  pressed");
             this.view.entryGUI.setVisible(true);
@@ -111,20 +113,27 @@ public class diffieController implements ActionListener {
                 System.out.println(this.view.loginGUI.jUserField.getText());
                 System.out.println(this.view.loginGUI.jPasswordField1.getText());
                 Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
+
                 System.out.println(l);
 
-                this.model.checkUser(this.view.loginGUI.jUserField.getText(), l);
-                setGuiVisFalse();
-                if (userIsAdmin()) {
-                    this.view.adminActivities.setVisible(true);
+                if (this.model.checkUser(this.view.loginGUI.jUserField.getText(), l)) {
+                    refreshFields();
+
+                    if (userIsAdmin()) {
+                        this.view.adminActivities.setVisible(true);
+                    } else {
+                        this.view.userActivitiesGUI.setVisible(true);
+                    }
+
+                    this.view.repaint();
                 } else {
-                    this.view.userActivitiesGUI.setVisible(true);
+                    this.view.loginGUI.jError.setVisible(true);
+                    this.view.repaint();
+
                 }
-
+            } catch (NumberFormatException k) {
+                this.view.loginGUI.jError.setVisible(true);
                 this.view.repaint();
-
-            } catch (Exception x) {
-                System.out.println(x);
             }
 
         } //create user gui listeners
@@ -135,13 +144,15 @@ public class diffieController implements ActionListener {
             this.view.repaint();
             String username = this.view.createUserGUI.jUserField.getText();
             this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected());
-
+            refreshFields();
         } else if (source == this.view.passwordGUI.jButton1) {
             setGuiVisFalse();
 
             System.out.println("create Password option pressed");
 
             this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText());
+            refreshFields();
+
             this.view.repaint();
             if (userIsAdmin()) {
                 this.view.adminActivities.setVisible(true);
@@ -180,6 +191,19 @@ public class diffieController implements ActionListener {
         this.view.userActivitiesGUI.setVisible(false);
 
         this.view.passwordGUI.setVisible(false);
+
+    }
+
+    public void refreshFields() {
+        this.view.createUserGUI.jPasswordField1.setText("");
+        this.view.createUserGUI.jUserField.setText("");
+        this.view.passwordGUI.jPasswordField1.setText("");
+        this.view.passwordGUI.jPassIdField.setText("");
+        this.view.passwordGUI.jUserField.setText("");
+        this.view.loginGUI.jPasswordField1.setText("");
+        this.view.loginGUI.jUserField.setText("");
+
+        this.view.loginGUI.jError.setVisible(false);
 
     }
 }

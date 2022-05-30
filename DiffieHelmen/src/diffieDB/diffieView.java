@@ -114,10 +114,7 @@ public class diffieView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         userData data = (userData) arg;
-        if (!data.loginFlag) {
-            this.loginGUI.jError.setVisible(true);
-
-        } else if (data.loginFlag) {
+       if (data.loginFlag) {
 
             this.loginGUI.setVisible(false);
             if (!data.currentUser.getIsAdmin()) {

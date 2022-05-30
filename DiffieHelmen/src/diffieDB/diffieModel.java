@@ -24,12 +24,13 @@ public class diffieModel extends Observable {
         this.db.dbsetup();
     }
 
-    public void checkUser(String username, Integer masterpin) {
+    public boolean checkUser(String username, Integer masterpin) {
         System.out.println("Check User notified");
 
         this.data = this.db.checkUser(username, masterpin);
         this.setChanged();
         this.notifyObservers(this.data);
+        return this.data.loginFlag;
     }
 
     public boolean addUser(String username, String secret, Boolean isAdmin) {
