@@ -123,13 +123,11 @@ public class diffieView extends JFrame implements Observer {
             if (!data.currentUser.getIsAdmin()) {
                 updateTable(data);
                 this.started = true;
-                this.userActivitiesGUI.setVisible(true);
 
             } else {
 
                 updateTable(data);
                 this.started = true;
-                this.adminActivities.setVisible(true);
 
             }
         } else {
