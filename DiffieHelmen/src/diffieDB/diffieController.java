@@ -45,13 +45,14 @@ public class diffieController implements ActionListener {
             this.view.updateTable(this.model.data);
         } else if (source == this.view.adminActivities.delUser) {
             System.out.println("Del User clicked");
-            int column = 1;
-            int row = this.view.adminActivities.userTable.getSelectedRow();
-            System.out.println(row);
-            System.out.println(this.view.adminActivities.userModel.getValueAt(row, column).toString());
-            this.model.removeUser(this.view.adminActivities.userModel.getValueAt(row, column).toString());
-            this.model.updateTables();
-
+            if (this.view.adminActivities.userTable.getSelectedRow() > -1) {
+                int column = 1;
+                int row = this.view.adminActivities.userTable.getSelectedRow();
+                System.out.println(row);
+                System.out.println(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+                this.model.removeUser(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+                this.model.updateTables();
+            }
             this.view.updateTable(this.model.data);
             this.view.repaint();
 
@@ -156,9 +157,9 @@ public class diffieController implements ActionListener {
             System.out.println("create Password option pressed");
 
             if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText())) {
+
                 refreshFields();
                 setGuiVisFalse();
-
                 this.view.repaint();
                 if (userIsAdmin()) {
                     this.view.adminActivities.setVisible(true);
@@ -175,6 +176,8 @@ public class diffieController implements ActionListener {
         } else if (source == this.view.passwordGUI.backButton) {
 
             System.out.println("Back Password option pressed");
+            setGuiVisFalse();
+
             if (userIsAdmin()) {
                 this.view.adminActivities.setVisible(true);
 
@@ -186,13 +189,15 @@ public class diffieController implements ActionListener {
 
             System.out.println("Back Password option pressed");
             refreshFields();
-            this.view.createUserGUI.setVisible(false);
+            setGuiVisFalse();
+
             this.view.entryGUI.setVisible(true);
             this.view.repaint();
         } else if (source == this.view.loginGUI.backButton) {
+            refreshFields();
+            setGuiVisFalse();
 
             System.out.println("Back Password option pressed");
-            this.view.loginGUI.setVisible(false);
             this.view.entryGUI.setVisible(true);
             this.view.repaint();
         }
