@@ -36,7 +36,7 @@ public class createUserGUI extends JPanel implements ActionListener {
         //creatingthe user area
         //setting the frame
         this.setSize(500, 200);
-
+        
         //adding the username login label and text box
         this.jUsername = new JLabel("Enter a Username ");
         this.jUserField = new JTextField();

@@ -42,9 +42,7 @@ public class diffieController implements ActionListener {
         else if (source == this.view.adminActivitiesGUI.delUser) {
             if (this.view.adminActivitiesGUI.userTable.getSelectedRow() > -1) {
                 int column = 1;
-                int row = this.view.adminActivitiesGUI.userTable.getSelectedRow();
-                System.out.println(row);
-                System.out.println(this.view.adminActivitiesGUI.userModel.getValueAt(row, column).toString());
+                int row = this.view.adminActivitiesGUI.userTable.getSelectedRow();               
                 this.model.removeUser(this.view.adminActivitiesGUI.userModel.getValueAt(row, column).toString());
                 this.model.updateTables();
             }
@@ -69,8 +67,6 @@ public class diffieController implements ActionListener {
         //add Password
         else if (source == this.view.userActivitiesGUI.add) {
             setGuiVisFalse();
-
-            System.out.println("Add Password CLicked");
             this.view.passwordGUI.setVisible(true);
             this.model.updateTables();
 
@@ -78,7 +74,6 @@ public class diffieController implements ActionListener {
             this.view.repaint();
         } //Delete Password
         else if (source == this.view.userActivitiesGUI.remove) {
-            System.out.println("Del Pass clicked");
             if (this.view.userActivitiesGUI.passTable.getSelectedRow() > -1) {
                 Object output = this.view.userActivitiesGUI.passModel.getValueAt(this.view.userActivitiesGUI.passTable.getSelectedRow(), 0);
                 this.model.removePassword((output != null) ? output.toString() : "null");
@@ -104,8 +99,6 @@ public class diffieController implements ActionListener {
         } //login gui listeners
         else if (source == this.view.loginGUI.loginButton) {
             try {
-                System.out.println(this.view.loginGUI.jUserField.getText());
-                System.out.println(this.view.loginGUI.jPasswordField1.getText());
                 Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
 
                 //check ig user exists, if true display activites panel

@@ -67,7 +67,7 @@ public class passwordGUI extends JPanel implements ActionListener {
 
          //adding Back button
         this.backButton = new JButton("<- Go Back");
-        this.backButton.setBounds(300, 0, 100, 20);
+        this.backButton.setBounds(470, 0, 100, 20);
         this.add(backButton);
         
         this.passInfoString = "<html>PassID: an identifier for you to remember the password<br><br>Username: your username<br><br>Password: your password</html>";

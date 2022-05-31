@@ -97,9 +97,9 @@ public class diffieDatabase {
             }
             statement.close();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ProgramMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (Exception ex) {
+            System.out.println("Make sure to close all previous instances of the program.");
+           }
         return data;
 
     }

@@ -32,9 +32,9 @@ public class diffieView extends JFrame implements Observer {
     public diffieView() {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(600, 500));
+        this.setPreferredSize(new Dimension(600, 300));
         this.pack();
-        
+        this.setResizable(true);
         this.add(entryGUI);
         this.add(loginGUI);
         this.add(createUserGUI);
@@ -121,6 +121,7 @@ public class diffieView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         userData data = (userData) arg;
+        this.pack();
         if (data != null) 
         {
             if (data.loginFlag) {
