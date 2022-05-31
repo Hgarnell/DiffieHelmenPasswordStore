@@ -25,7 +25,7 @@ public class loginGUI extends JPanel {
 
     public JLabel jPassword;
     public JLabel jError;
-    public JButton loginButton,backButton;
+    public JButton loginButton, backButton;
     public JPasswordField jPasswordField1;
     public JTextField jUserField;
 
@@ -58,25 +58,17 @@ public class loginGUI extends JPanel {
         this.loginButton.setBounds(300, 130, 100, 20);
         this.add(loginButton);
         this.setVisible(true);
-        
-//adding Back button
+
+        //adding Back button
         this.backButton = new JButton("<- Go Back");
         this.backButton.setBounds(300, 0, 100, 20);
         this.add(backButton);
+        
         //formating the errormessage
         this.jError = new JLabel("<html>Incorrect Username or Password</html>");
         jError.setForeground(Color.red);
         this.jError.setBounds(200, 5, 250, 100);
         jError.setVisible(false);
         this.add(jError);
-        //this.setVisible(true);
-
-    }
-
-//      
-    public static void main(String[] args) {
-        loginGUI login = new loginGUI();
-        //   login.setFrame(this.frame);
-
     }
 }

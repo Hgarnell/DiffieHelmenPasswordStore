@@ -20,7 +20,7 @@ import javax.swing.JTable;
  */
 public class diffieView extends JFrame implements Observer {
 
-    adminActivitiesGUI adminActivities = new adminActivitiesGUI();
+    adminActivitiesGUI adminActivitiesGUI = new adminActivitiesGUI();
     userActivitiesGUI userActivitiesGUI = new userActivitiesGUI();
     createUserGUI createUserGUI = new createUserGUI();
     entryGUI entryGUI = new entryGUI();
@@ -30,26 +30,25 @@ public class diffieView extends JFrame implements Observer {
     private boolean started = false;
 
     public diffieView() {
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(600, 500));
         this.pack();
+        
         this.add(entryGUI);
         this.add(loginGUI);
-        this.loginGUI.setVisible(false);
         this.add(createUserGUI);
-        this.createUserGUI.setVisible(false);
-
         this.add(userActivitiesGUI);
-        this.userActivitiesGUI.setVisible(false);
-
-        this.add(adminActivities);
-        this.adminActivities.setVisible(false);
-
+        this.add(adminActivitiesGUI);
         this.add(passwordGUI);
+
+        this.loginGUI.setVisible(false);
+        this.createUserGUI.setVisible(false);
+        this.userActivitiesGUI.setVisible(false);
+        this.adminActivitiesGUI.setVisible(false);
         this.passwordGUI.setVisible(false);
 
         this.setVisible(true);
-
     }
 
     public void addActionListner(ActionListener listener) {
@@ -63,10 +62,10 @@ public class diffieView extends JFrame implements Observer {
         this.passwordGUI.createPassButton.addActionListener(listener);
         this.passwordGUI.backButton.addActionListener(listener);
 
-        this.adminActivities.delUser.addActionListener(listener);
-        this.adminActivities.add.addActionListener(listener);
-        this.adminActivities.remove.addActionListener(listener);
-        this.adminActivities.logout.addActionListener(listener);
+        this.adminActivitiesGUI.delUser.addActionListener(listener);
+        this.adminActivitiesGUI.add.addActionListener(listener);
+        this.adminActivitiesGUI.remove.addActionListener(listener);
+        this.adminActivitiesGUI.logout.addActionListener(listener);
 
         this.userActivitiesGUI.add.addActionListener(listener);
         this.userActivitiesGUI.remove.addActionListener(listener);
@@ -79,26 +78,26 @@ public class diffieView extends JFrame implements Observer {
 
     public void updateTable(userData data) {
         if (data.currentUser.getIsAdmin()) {
-            this.adminActivities.userModel.setRowCount(0);
-            this.adminActivities.passModel.setRowCount(0);
+            this.adminActivitiesGUI.userModel.setRowCount(0);
+            this.adminActivitiesGUI.passModel.setRowCount(0);
 
-            this.adminActivities.dataPass = data.passArrayList;
-            this.adminActivities.dataUser = data.userMap;
+            this.adminActivitiesGUI.dataPass = data.passArrayList;
+            this.adminActivitiesGUI.dataUser = data.userMap;
 
-            for (String[] k : this.adminActivities.dataUser) {
-                this.adminActivities.userModel.addRow(k);
+            for (String[] k : this.adminActivitiesGUI.dataUser) {
+                this.adminActivitiesGUI.userModel.addRow(k);
             }
 
-            for (String[] j : this.adminActivities.dataPass) {
-                this.adminActivities.passModel.addRow(j);
+            for (String[] j : this.adminActivitiesGUI.dataPass) {
+                this.adminActivitiesGUI.passModel.addRow(j);
             }
-            this.adminActivities.passModel.fireTableDataChanged();
-            this.adminActivities.userModel.fireTableDataChanged();
+            this.adminActivitiesGUI.passModel.fireTableDataChanged();
+            this.adminActivitiesGUI.userModel.fireTableDataChanged();
 
-            this.adminActivities.userTable.revalidate();
-            this.adminActivities.passTable.revalidate();
+            this.adminActivitiesGUI.userTable.revalidate();
+            this.adminActivitiesGUI.passTable.revalidate();
 
-            this.adminActivities.repaint();
+            this.adminActivitiesGUI.repaint();
         } else {
             this.userActivitiesGUI.passModel.setRowCount(0);
             this.userActivitiesGUI.dataPass = data.passArrayList;
@@ -117,9 +116,9 @@ public class diffieView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         userData data = (userData) arg;
-        if (data != null) {
+        if (data != null) 
+        {
             if (data.loginFlag) {
-
                 this.loginGUI.setVisible(false);
                 if (!data.currentUser.getIsAdmin()) {
                     updateTable(data);
@@ -129,15 +128,11 @@ public class diffieView extends JFrame implements Observer {
 
                     updateTable(data);
                     this.started = true;
-
                 }
-            } else {
-
-            }
+            } 
         }
+        
     }
 }
 
-//            this.setQuestion(dataPass.num1, dataPass.num2);
-//        }
 

@@ -8,12 +8,14 @@ package diffieDB;
  *
  * @author hanna
  */
-public class diffieMain{
-       public static void main(String[] args) {
+public class diffieMain {
+
+    public static void main(String[] args) {
+
         diffieView view = new diffieView();
         diffieModel model = new diffieModel();
-        diffieController controller = new diffieController(view,model);
+        diffieController controller = new diffieController(view, model);
         model.addObserver(view);
-        }
 
+    }
 }

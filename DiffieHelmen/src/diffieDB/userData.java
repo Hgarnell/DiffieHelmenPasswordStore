@@ -19,7 +19,6 @@ public class userData {
     boolean quitFlag = false;
     User currentUser = null;
     String[][] passArrayList;
-    String[][] userMap;
-   
+    String[][] userMap;   
 
 }

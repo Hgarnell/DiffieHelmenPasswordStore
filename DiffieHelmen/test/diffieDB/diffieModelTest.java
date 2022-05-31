@@ -22,24 +22,25 @@ import static org.junit.Assert.*;
  * @author hanna
  */
 public class diffieModelTest {
-    
+
     private diffieModelTest diffieModelTest;
+
     public diffieModelTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         diffieModelTest = new diffieModelTest();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -57,7 +58,7 @@ public class diffieModelTest {
         boolean result = instance.checkUser(username, masterpin);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-     
+
     }
 
     /**
@@ -76,7 +77,7 @@ public class diffieModelTest {
         // TODO review the generated test code and remove the default call to fail.
     }
 
-     /**
+    /**
      * Test of testAddAdminUser method, of class diffieModel.
      */
     @Test
@@ -91,6 +92,20 @@ public class diffieModelTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
+
+    @Test
+    public void testBadPinUser() {
+        System.out.println("addUser");
+        String username = "testAdmin";
+        String secret = "test";
+        Boolean isAdmin = true;
+        diffieModel instance = new diffieModel();
+        boolean expResult = false;
+        boolean result = instance.addUser(username, secret, isAdmin);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
     /**
      * Test of addPass method, of class diffieModel.
      */
@@ -108,7 +123,21 @@ public class diffieModelTest {
         // TODO review the generated test code and remove the default call to fail.
     }
     
-     @Test
+    @Test
+    public void testAddBadPass() {
+        System.out.println("addPass");
+        User user = testUserGen();
+        String passID = " ";
+        String passUsername = " ";
+        String password = "test";
+        diffieModel instance = new diffieModel();
+        boolean expResult = false;
+        boolean result = instance.addPass(user, passID, passUsername, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    @Test
     public void testAddDouble() {
         System.out.println("addPass");
         User user = testUserGen();
@@ -119,35 +148,6 @@ public class diffieModelTest {
         boolean expResult = false;
         instance.addPass(user, passID, passUsername, password);
         boolean result = instance.addPass(user, passID, passUsername, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of removeUser method, of class diffieModel.
-     */
-    @Test
-    public void testRemoveUser() {
-        System.out.println("removeUser");
-        String username = "tes";
-        diffieModel instance = new diffieModel();
-        boolean expResult = false;
-        boolean result = instance.removeUser(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of removePassword method, of class diffieModel.
-     */
-    @Test
-    public void testRemovePassword() {
-        System.out.println("removePassword");
-        String passID = "test";
-        diffieModel instance = new diffieModel();
-        instance.data.currentUser = testUserGen();
-        boolean expResult = false;
-        boolean result = instance.removePassword(passID);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -174,11 +174,10 @@ public class diffieModelTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //    }
 //    
-    public User testUserGen()
-    {
-        Key k = new  Key(new BigInteger("2"),new BigInteger("2"),new BigInteger("2"));
-        return (new GeneralUser("test",new UserKey(k,k,k)));
-        
+    public User testUserGen() {
+        Key k = new Key(new BigInteger("2"), new BigInteger("2"), new BigInteger("2"));
+        return (new GeneralUser("test", new UserKey(k, k, k)));
+
     }
-    
+
 }

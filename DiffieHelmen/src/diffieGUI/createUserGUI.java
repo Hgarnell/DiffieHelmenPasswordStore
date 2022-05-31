@@ -67,7 +67,7 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.add(createButton);
         this.setVisible(true);
 
-        
+    
         //adding Back button
         this.backButton = new JButton("<- Go Back");
         this.backButton.setBounds(300, 0, 100, 20);
@@ -81,6 +81,7 @@ public class createUserGUI extends JPanel implements ActionListener {
         errorMessage.setVisible(false);
         this.add(errorMessage);
         
+        //Formatting for the info message on how to create a user
         String userInfoString = "<html>Your username can be anything you want, however make it something you can remember<br> Your pin number must be a 4 digit integer</html>";
         this.jInfo = new JLabel(userInfoString);
         jInfo.setForeground(Color.black);

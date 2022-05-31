@@ -7,9 +7,7 @@ package diffieDB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.xml.transform.Source;
+
 
 /**
  *
@@ -25,7 +23,6 @@ public class diffieController implements ActionListener {
         this.view = view;
         this.model = model;
         this.view.addActionListner(this);
-
     }
 
     @Override
@@ -33,45 +30,46 @@ public class diffieController implements ActionListener {
         Object source = e.getSource();
 
         //admin activity gui listeners
-        if (source == this.view.adminActivities.add) {
+        if (source == this.view.adminActivitiesGUI.add) {
             setGuiVisFalse();
             this.view.passwordGUI.setVisible(true);
 
-            System.out.println("Add Password CLicked");
             this.view.repaint();
 
             this.model.updateTables();
 
             this.view.updateTable(this.model.data);
-        } else if (source == this.view.adminActivities.delUser) {
-            System.out.println("Del User clicked");
-            if (this.view.adminActivities.userTable.getSelectedRow() > -1) {
+        }
+        //Delete User selected by Admin
+        else if (source == this.view.adminActivitiesGUI.delUser) {
+            if (this.view.adminActivitiesGUI.userTable.getSelectedRow() > -1) {
                 int column = 1;
-                int row = this.view.adminActivities.userTable.getSelectedRow();
+                int row = this.view.adminActivitiesGUI.userTable.getSelectedRow();
                 System.out.println(row);
-                System.out.println(this.view.adminActivities.userModel.getValueAt(row, column).toString());
-                this.model.removeUser(this.view.adminActivities.userModel.getValueAt(row, column).toString());
+                System.out.println(this.view.adminActivitiesGUI.userModel.getValueAt(row, column).toString());
+                this.model.removeUser(this.view.adminActivitiesGUI.userModel.getValueAt(row, column).toString());
                 this.model.updateTables();
             }
             this.view.updateTable(this.model.data);
             this.view.repaint();
-
-        } else if (source == this.view.adminActivities.remove) {
-
-            System.out.println("Del Pass clicked");
-            Object output = this.view.adminActivities.passModel.getValueAt(this.view.adminActivities.passTable.getSelectedRow(), 0);
+        }
+        //Remove Password
+        else if (source == this.view.adminActivitiesGUI.remove) {
+            Object output = this.view.adminActivitiesGUI.passModel.getValueAt(this.view.adminActivitiesGUI.passTable.getSelectedRow(), 0);
             this.model.removePassword((output != null) ? output.toString() : "null");
             this.view.updateTable(this.model.data);
             this.view.repaint();
-        } else if (source == this.view.adminActivities.logout) {
+        } 
+        //log admin user out and quitGame
+        else if (source == this.view.adminActivitiesGUI.logout) {
             refreshFields();
-
             setGuiVisFalse();
-            System.out.println("create logout  pressed");
             this.view.entryGUI.setVisible(true);
             this.model.quitGame();
             this.view.repaint();
-        } //user activity gui listeners 
+        }
+        
+        //user activity gui listeners 
         //add Password
         else if (source == this.view.userActivitiesGUI.add) {
             setGuiVisFalse();
@@ -97,157 +95,144 @@ public class diffieController implements ActionListener {
         } // entry gui listeners
         else if (source == this.view.entryGUI.createUserOpt) {
             setGuiVisFalse();
-            System.out.println("create User option pressed");
             this.view.createUserGUI.setVisible(true);
             this.view.repaint();
 
         } else if (source == this.view.entryGUI.loginOpt) {
             setGuiVisFalse();
-            System.out.println("Login option pressed");
             this.view.loginGUI.setVisible(true);
 
             this.view.repaint();
-        } //login gui listeners
+        } 
+        //login gui listeners
         else if (source == this.view.loginGUI.loginButton) {
             try {
-                System.out.println("Login User option pressed");
                 System.out.println(this.view.loginGUI.jUserField.getText());
                 System.out.println(this.view.loginGUI.jPasswordField1.getText());
                 Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
-
-                System.out.println(l);
-
+                
+                //check ig user exists, if true display activites panel
                 if (this.model.checkUser(this.view.loginGUI.jUserField.getText(), l)) {
+                    
                     refreshFields();
-
                     if (userIsAdmin()) {
-                        this.view.adminActivities.setVisible(true);
+                        this.view.adminActivitiesGUI.setVisible(true);
                     } else {
                         this.view.userActivitiesGUI.setVisible(true);
                     }
 
                     this.view.repaint();
                 } else {
+                    //if password is incorrect Display error message
                     this.view.loginGUI.jError.setVisible(true);
                     this.view.repaint();
 
                 }
-            } catch (NumberFormatException k) {
+            }
+            //if incorrect format display error message
+            catch (NumberFormatException k) {
                 this.view.loginGUI.jError.setVisible(true);
                 this.view.repaint();
             }
 
-        } //create user gui listeners
+        } 
+        
+        //create user gui listeners
         else if (source == this.view.createUserGUI.createButton) {
-            System.out.println("create User option pressed");
-
+            
             String username = this.view.createUserGUI.jUserField.getText();
-            if (this.model.addUser(this.view.createUserGUI.jUserField.getText(), this.view.createUserGUI.jPasswordField1.getText(), this.view.createUserGUI.checkAdmin.isSelected())) {
+            Boolean isAdmin = this.view.createUserGUI.checkAdmin.isSelected();
+           
+            //if user is added succesfully return to entryGUI
+            if (this.model.addUser(username, this.view.createUserGUI.jPasswordField1.getText(), isAdmin)){
                 setGuiVisFalse();
                 this.view.entryGUI.setVisible(true);
                 this.view.repaint();
                 refreshFields();
-
-            } else {
+            }
+            //if not display error message
+            else {
                 this.view.createUserGUI.jInfo.setVisible(false);
                 this.view.createUserGUI.errorMessage.setVisible(true);
             }
-        } else if (source == this.view.passwordGUI.createPassButton) {
-
-            System.out.println("create Password option pressed");
-
-            if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText())) {
-
+        }
+        //Create password button on password GUI
+        else if (source == this.view.passwordGUI.createPassButton) {
+            //if Password is added succesfully return to suer panel
+            if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText()))
+            {
                 refreshFields();
                 setGuiVisFalse();
                 this.view.repaint();
                 if (userIsAdmin()) {
-                    this.view.adminActivities.setVisible(true);
-
+                    this.view.adminActivitiesGUI.setVisible(true);
                 } else {
                     this.view.userActivitiesGUI.setVisible(true);
                 }
-            } else {
+            }
+            //if Password fields is incorrect display the error message
+            else {
                 this.view.passwordGUI.jInfo.setVisible(false);
                 this.view.passwordGUI.jError.setVisible(true);
-                //refreshFields();
             }
-
-        } else if (source == this.view.passwordGUI.backButton) {
-
-            System.out.println("Back Password option pressed");
+        }
+        //Back button to go back to userActivityPanel
+        else if (source == this.view.passwordGUI.backButton) {
             setGuiVisFalse();
-
             if (userIsAdmin()) {
-                this.view.adminActivities.setVisible(true);
-
+                this.view.adminActivitiesGUI.setVisible(true);
             } else {
                 this.view.userActivitiesGUI.setVisible(true);
             }
             this.view.repaint();
-        } else if (source == this.view.createUserGUI.backButton) {
-
-            System.out.println("Back Password option pressed");
+        }
+        //Back button for Create user gui to go back to entry
+        else if (source == this.view.createUserGUI.backButton) {
             refreshFields();
             setGuiVisFalse();
-
-            this.view.entryGUI.setVisible(true);
-            this.view.repaint();
-        } else if (source == this.view.loginGUI.backButton) {
-            refreshFields();
-            setGuiVisFalse();
-
-            System.out.println("Back Password option pressed");
             this.view.entryGUI.setVisible(true);
             this.view.repaint();
         }
-
-//            case ():
-//                String username = this.view.unInput.getText();
-//                String Password = this.view.pwInput.getText();
-//                this.model.checkUser(username, Password);
-//                break;
-//            case "Next":
-//                this.model.checkAnswer(this.view.calcSolution.getText());
-//                break;
-//            case "Quit":
-//                this.model.quitGame();
-//                break;
-//            default:
-//                break;
+        //Back button for the loginn GUI to go back to entry GUI
+        else if (source == this.view.loginGUI.backButton) {
+            refreshFields();
+            setGuiVisFalse();
+            this.view.entryGUI.setVisible(true);
+            this.view.repaint();
+        }
     }
 
+    //return boolean if the current user in the data is an admin or not
     public boolean userIsAdmin() {
         return this.model.data.currentUser.getIsAdmin();
     }
 
+    //set all gui visibility false
     public void setGuiVisFalse() {
-        this.view.adminActivities.setVisible(false);
+        this.view.adminActivitiesGUI.setVisible(false);
         this.view.createUserGUI.setVisible(false);
-
         this.view.entryGUI.setVisible(false);
-
         this.view.loginGUI.setVisible(false);
         this.view.userActivitiesGUI.setVisible(false);
-
         this.view.passwordGUI.setVisible(false);
-
     }
 
+    //set all fields and text messages to original state
     public void refreshFields() {
         this.view.createUserGUI.jPasswordField1.setText("");
         this.view.createUserGUI.jUserField.setText("");
         this.view.createUserGUI.errorMessage.setVisible(false);
         this.view.createUserGUI.jInfo.setVisible(true);
+        this.view.createUserGUI.errorMessage.setVisible(false);
+
         this.view.passwordGUI.jPasswordField1.setText("");
         this.view.passwordGUI.jPassIdField.setText("");
         this.view.passwordGUI.jUserField.setText("");
-        this.view.loginGUI.jPasswordField1.setText("");
-        this.view.loginGUI.jUserField.setText("");
         this.view.passwordGUI.jInfo.setVisible(true);
         this.view.passwordGUI.jError.setVisible(false);
+        
+        this.view.loginGUI.jPasswordField1.setText("");
+        this.view.loginGUI.jUserField.setText("");
         this.view.loginGUI.jError.setVisible(false);
-        this.view.createUserGUI.errorMessage.setVisible(false);
-
     }
 }

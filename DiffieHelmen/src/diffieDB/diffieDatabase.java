@@ -34,6 +34,7 @@ public class diffieDatabase {
     String dbusername = "pdc";  //your DB username
     String dbpassword = "pdc";   //your DB password
 
+    //EMBEDDED db SETUP                                                                                                                                                                                
     public void dbsetup() {
         try {
 
@@ -57,7 +58,8 @@ public class diffieDatabase {
 
         }
     }
-
+    
+    //check if user exists with int password
     public userData checkUser(String username, Integer password) {
         System.out.println("entered check user data");
         userData data = new userData();
@@ -105,6 +107,7 @@ public class diffieDatabase {
 
     }
 
+    //check if the tables exist with a string new name
     private boolean checkTableExisting(String newTableName) {
         boolean flag = false;
         try {
@@ -129,6 +132,7 @@ public class diffieDatabase {
         return flag;
     }
 
+    //add a user to the database
     void addUser(User newUser) {
 
         try {
@@ -142,6 +146,7 @@ public class diffieDatabase {
 
     }
 
+    //remove user where username matches the string
     boolean removeUser(String k) {
 
         try {
@@ -158,6 +163,7 @@ public class diffieDatabase {
         return false;
     }
 
+    //returns list of passwords where the users username matches
     public String[][] getPasswords(User user) {
         ArrayList<Password> passwords = new ArrayList<>();
         try {
@@ -182,6 +188,7 @@ public class diffieDatabase {
         return passArray;
     }
 
+    //return list of users and if they are admin
     public String[][] getUserList() {
         Map<String, Boolean> users = new HashMap<>();
         try {
@@ -205,6 +212,7 @@ public class diffieDatabase {
         return userArray;
     }
 
+    //remove password from the database through getting the passID
     boolean removePassword(String string, String username) {
         System.out.println("db remove pass entered");
         try {

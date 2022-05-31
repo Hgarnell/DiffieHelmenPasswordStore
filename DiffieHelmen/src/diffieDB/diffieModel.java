@@ -24,15 +24,16 @@ public class diffieModel extends Observable {
         this.db.dbsetup();
     }
 
+    //notify observers that data for current user has been changed if succesfully logged in return true
     public boolean checkUser(String username, Integer masterpin) {
         System.out.println("Check User notified");
-
         this.data = this.db.checkUser(username, masterpin);
         this.setChanged();
         this.notifyObservers(this.data);
         return this.data.loginFlag;
     }
 
+    //notify observers that a new user has been added succesfully also ensure that pattern of secret string is 4 integers
     public boolean addUser(String username, String secret, Boolean isAdmin) {
 
         UserKeyGenerator k = new UserKeyGenerator();
@@ -53,6 +54,7 @@ public class diffieModel extends Observable {
         }
     }
 
+    //Notify the observers that data has been changed after password added to the database succesfully
     public boolean addPass(User user, String passID, String passUsername, String password) {
 
         System.out.println("addPass notified");
@@ -70,6 +72,7 @@ public class diffieModel extends Observable {
 
     }
 
+    //notify data usermap the userlist has been changed and observers that data has been changed
     public boolean removeUser(String username) {
 
         if (this.db.removeUser(username)) {
@@ -82,7 +85,9 @@ public class diffieModel extends Observable {
         return false;
 
     }
-
+    
+    //attempt to remove password from db wheree passID matches passowrd passID of data's current user.
+    //notify observers if true and update data
     public boolean removePassword(String passID) {
 
         if (this.db.removePassword(passID, data.currentUser.getUsername())) {
@@ -96,6 +101,7 @@ public class diffieModel extends Observable {
 
     }
 
+    //update tables and notify observers
     public void updateTables() {
 
         this.data.passArrayList = this.db.getPasswords(data.currentUser);
@@ -105,6 +111,7 @@ public class diffieModel extends Observable {
 
     }
 
+    //notify Observers game has been quit
     public void quitGame() {
         this.data.currentUser = null;
         this.data.loginFlag = false;

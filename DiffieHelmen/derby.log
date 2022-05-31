@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Tue May 31 12:08:52 NZST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-1771-a2c6-00000a6a0440 
-on database directory C:\Users\hanna\OneDrive - AUT University\Documents\GitHub\PDC_ASS_2\DiffieHelmen\DiffieDB with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Tue May 31 13:08:41 NZST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-17a8-66e4-00000a7a73d8 
+on database directory C:\Users\hanna\OneDrive - AUT University\Documents\GitHub\PDC_ASS_2\DiffieHelmen\DiffieDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
 Loaded from file:/C:/Users/hanna/OneDrive%20-%20AUT%20University/Documents/NetBeansProjects/PDC_Tutorials/PDC_Tutorials/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_321-b07
