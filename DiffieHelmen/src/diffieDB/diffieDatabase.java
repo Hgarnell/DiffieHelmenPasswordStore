@@ -61,7 +61,6 @@ public class diffieDatabase {
 
     //check if user exists with int password
     public userData checkUser(String username, Integer password) {
-        System.out.println("entered check user data");
         userData data = new userData();
         User tempUser;
 
@@ -92,7 +91,6 @@ public class diffieDatabase {
                     data.loginFlag = false;
                 }
             } else {
-                System.out.println("no such user");
                 data.loginFlag = false;
             }
             statement.close();
@@ -149,8 +147,6 @@ public class diffieDatabase {
     boolean removeUser(String k) {
 
         try {
-            System.out.println("REMOVE USER");
-            System.out.println(k);
             Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Users WHERE username = '" + k + "'");
             statement.executeUpdate("DELETE FROM Password WHERE username = '" + k + "'");
@@ -213,7 +209,6 @@ public class diffieDatabase {
 
     //remove password from the database through getting the passID
     boolean removePassword(String string, String username) {
-        System.out.println("db remove pass entered");
         try {
             Statement statement = conn.createStatement();
             statement.executeUpdate("DELETE FROM Password WHERE passID ='" + string + "' AND username ='" + username + "'");

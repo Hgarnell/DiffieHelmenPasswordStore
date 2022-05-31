@@ -42,11 +42,12 @@ public class diffieController implements ActionListener {
         else if (source == this.view.adminActivitiesGUI.delUser) {
             if (this.view.adminActivitiesGUI.userTable.getSelectedRow() > -1) {
                 int column = 1;
-                int row = this.view.adminActivitiesGUI.userTable.getSelectedRow();               
+                int row = this.view.adminActivitiesGUI.userTable.getSelectedRow();
                 this.model.removeUser(this.view.adminActivitiesGUI.userModel.getValueAt(row, column).toString());
                 this.model.updateTables();
             }
             this.view.updateTable(this.model.data);
+            this.view.setSize(600, 600);
             this.view.repaint();
         } //Remove Password
         else if (source == this.view.adminActivitiesGUI.remove) {
@@ -55,6 +56,7 @@ public class diffieController implements ActionListener {
                 this.model.removePassword((output != null) ? output.toString() : "null");
             }
             this.view.updateTable(this.model.data);
+            this.view.setSize(600, 600);
             this.view.repaint();
         } //log admin user out and quitGame
         else if (source == this.view.adminActivitiesGUI.logout) {
@@ -103,8 +105,9 @@ public class diffieController implements ActionListener {
 
                 //check ig user exists, if true display activites panel
                 if (this.model.checkUser(this.view.loginGUI.jUserField.getText(), l)) {
-
                     refreshFields();
+                    this.view.setSize(600, 600);
+
                     if (userIsAdmin()) {
                         this.view.adminActivitiesGUI.setVisible(true);
                     } else {
@@ -149,6 +152,7 @@ public class diffieController implements ActionListener {
                 setGuiVisFalse();
                 this.view.repaint();
                 if (userIsAdmin()) {
+                    this.view.setSize(600, 600);
                     this.view.adminActivitiesGUI.setVisible(true);
                 } else {
                     this.view.userActivitiesGUI.setVisible(true);
@@ -161,6 +165,8 @@ public class diffieController implements ActionListener {
         } //Back button to go back to userActivityPanel
         else if (source == this.view.passwordGUI.backButton) {
             setGuiVisFalse();
+            this.view.setSize(600, 600);
+
             if (userIsAdmin()) {
                 this.view.adminActivitiesGUI.setVisible(true);
             } else {
@@ -199,6 +205,8 @@ public class diffieController implements ActionListener {
 
     //set all fields and text messages to original state
     public void refreshFields() {
+        this.view.setSize(600, 300);
+
         this.view.createUserGUI.jPasswordField1.setText("");
         this.view.createUserGUI.jUserField.setText("");
         this.view.createUserGUI.errorMessage.setVisible(false);

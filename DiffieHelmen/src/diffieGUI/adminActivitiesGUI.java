@@ -67,9 +67,9 @@ public class adminActivitiesGUI extends JPanel {
 
         this.scrollPane2 = new JScrollPane(userTable);
         this.scrollPane2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         this.scrollPane = new JScrollPane(passTable);
         this.scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.passTable.setSize(new Dimension(300,300));
 
         this.tablePanel.add(jlabel);
         this.tablePanel.add(scrollPane);

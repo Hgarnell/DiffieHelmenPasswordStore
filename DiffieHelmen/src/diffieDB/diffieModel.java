@@ -26,7 +26,6 @@ public class diffieModel extends Observable {
 
     //notify observers that data for current user has been changed if succesfully logged in return true
     public boolean checkUser(String username, Integer masterpin) {
-        System.out.println("Check User notified");
         this.data = this.db.checkUser(username, masterpin);
         this.setChanged();
         this.notifyObservers(this.data);
@@ -38,7 +37,6 @@ public class diffieModel extends Observable {
         boolean succ = false;
         
         UserKeyGenerator k = new UserKeyGenerator();
-        System.out.println("addUser notified");
         
         if (Pattern.matches("\\d{4}", String.valueOf(secret))) {
             UserKey v = k.userKeyGenerator(new BigInteger(secret));
