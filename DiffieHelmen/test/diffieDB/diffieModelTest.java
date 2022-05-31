@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 public class diffieModelTest {
 
     private diffieModelTest diffieModelTest;
-
     public diffieModelTest() {
     }
 
@@ -59,39 +58,7 @@ public class diffieModelTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 
-    }
-
-    /**
-     * Test of addUser method, of class diffieModel.
-     */
-    @Test
-    public void testAddNormalUser() {
-        System.out.println("addUser");
-        String username = "test";
-        String secret = "2222";
-        Boolean isAdmin = false;
-        diffieModel instance = new diffieModel();
-        boolean expResult = true;
-        boolean result = instance.addUser(username, secret, isAdmin);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of testAddAdminUser method, of class diffieModel.
-     */
-    @Test
-    public void testAddAdminUser() {
-        System.out.println("addUser");
-        String username = "testAdmin";
-        String secret = "2222";
-        Boolean isAdmin = true;
-        diffieModel instance = new diffieModel();
-        boolean expResult = true;
-        boolean result = instance.addUser(username, secret, isAdmin);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
+    } 
 
     @Test
     public void testBadPinUser() {
