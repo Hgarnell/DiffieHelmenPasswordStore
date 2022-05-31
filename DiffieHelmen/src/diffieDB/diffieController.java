@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
 
-
 /**
  *
  * @author hanna
@@ -39,8 +38,7 @@ public class diffieController implements ActionListener {
             this.model.updateTables();
 
             this.view.updateTable(this.model.data);
-        }
-        //Delete User selected by Admin
+        } //Delete User selected by Admin
         else if (source == this.view.adminActivitiesGUI.delUser) {
             if (this.view.adminActivitiesGUI.userTable.getSelectedRow() > -1) {
                 int column = 1;
@@ -52,24 +50,22 @@ public class diffieController implements ActionListener {
             }
             this.view.updateTable(this.model.data);
             this.view.repaint();
-        }
-        //Remove Password
+        } //Remove Password
         else if (source == this.view.adminActivitiesGUI.remove) {
-            Object output = this.view.adminActivitiesGUI.passModel.getValueAt(this.view.adminActivitiesGUI.passTable.getSelectedRow(), 0);
-            this.model.removePassword((output != null) ? output.toString() : "null");
+            if (this.view.adminActivitiesGUI.passTable.getSelectedRow() > -1) {
+                Object output = this.view.adminActivitiesGUI.passModel.getValueAt(this.view.adminActivitiesGUI.passTable.getSelectedRow(), 0);
+                this.model.removePassword((output != null) ? output.toString() : "null");
+            }
             this.view.updateTable(this.model.data);
             this.view.repaint();
-        } 
-        //log admin user out and quitGame
+        } //log admin user out and quitGame
         else if (source == this.view.adminActivitiesGUI.logout) {
             refreshFields();
             setGuiVisFalse();
             this.view.entryGUI.setVisible(true);
             this.model.quitGame();
             this.view.repaint();
-        }
-        
-        //user activity gui listeners 
+        } //user activity gui listeners 
         //add Password
         else if (source == this.view.userActivitiesGUI.add) {
             setGuiVisFalse();
@@ -83,9 +79,11 @@ public class diffieController implements ActionListener {
         } //Delete Password
         else if (source == this.view.userActivitiesGUI.remove) {
             System.out.println("Del Pass clicked");
-            Object output = this.view.userActivitiesGUI.passModel.getValueAt(this.view.userActivitiesGUI.passTable.getSelectedRow(), 0);
-            this.model.removePassword((output != null) ? output.toString() : "null");
-            this.model.updateTables();
+            if (this.view.userActivitiesGUI.passTable.getSelectedRow() > -1) {
+                Object output = this.view.userActivitiesGUI.passModel.getValueAt(this.view.userActivitiesGUI.passTable.getSelectedRow(), 0);
+                this.model.removePassword((output != null) ? output.toString() : "null");
+                this.model.updateTables();
+            }
             this.view.updateTable(this.model.data);
             this.view.repaint();
         } else if (source == this.view.userActivitiesGUI.logout) {
@@ -103,17 +101,16 @@ public class diffieController implements ActionListener {
             this.view.loginGUI.setVisible(true);
 
             this.view.repaint();
-        } 
-        //login gui listeners
+        } //login gui listeners
         else if (source == this.view.loginGUI.loginButton) {
             try {
                 System.out.println(this.view.loginGUI.jUserField.getText());
                 System.out.println(this.view.loginGUI.jPasswordField1.getText());
                 Integer l = parseInt(this.view.loginGUI.jPasswordField1.getText());
-                
+
                 //check ig user exists, if true display activites panel
                 if (this.model.checkUser(this.view.loginGUI.jUserField.getText(), l)) {
-                    
+
                     refreshFields();
                     if (userIsAdmin()) {
                         this.view.adminActivitiesGUI.setVisible(true);
@@ -128,39 +125,33 @@ public class diffieController implements ActionListener {
                     this.view.repaint();
 
                 }
-            }
-            //if incorrect format display error message
+            } //if incorrect format display error message
             catch (NumberFormatException k) {
                 this.view.loginGUI.jError.setVisible(true);
                 this.view.repaint();
             }
 
-        } 
-        
-        //create user gui listeners
+        } //create user gui listeners
         else if (source == this.view.createUserGUI.createButton) {
-            
+
             String username = this.view.createUserGUI.jUserField.getText();
             Boolean isAdmin = this.view.createUserGUI.checkAdmin.isSelected();
-           
+
             //if user is added succesfully return to entryGUI
-            if (this.model.addUser(username, this.view.createUserGUI.jPasswordField1.getText(), isAdmin)){
+            if (this.model.addUser(username, this.view.createUserGUI.jPasswordField1.getText(), isAdmin)) {
                 setGuiVisFalse();
                 this.view.entryGUI.setVisible(true);
                 this.view.repaint();
                 refreshFields();
-            }
-            //if not display error message
+            } //if not display error message
             else {
                 this.view.createUserGUI.jInfo.setVisible(false);
                 this.view.createUserGUI.errorMessage.setVisible(true);
             }
-        }
-        //Create password button on password GUI
+        } //Create password button on password GUI
         else if (source == this.view.passwordGUI.createPassButton) {
             //if Password is added succesfully return to suer panel
-            if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText()))
-            {
+            if (this.model.addPass(this.model.data.currentUser, this.view.passwordGUI.jPassIdField.getText(), this.view.passwordGUI.jUserField.getText(), this.view.passwordGUI.jPasswordField1.getText())) {
                 refreshFields();
                 setGuiVisFalse();
                 this.view.repaint();
@@ -169,14 +160,12 @@ public class diffieController implements ActionListener {
                 } else {
                     this.view.userActivitiesGUI.setVisible(true);
                 }
-            }
-            //if Password fields is incorrect display the error message
+            } //if Password fields is incorrect display the error message
             else {
                 this.view.passwordGUI.jInfo.setVisible(false);
                 this.view.passwordGUI.jError.setVisible(true);
             }
-        }
-        //Back button to go back to userActivityPanel
+        } //Back button to go back to userActivityPanel
         else if (source == this.view.passwordGUI.backButton) {
             setGuiVisFalse();
             if (userIsAdmin()) {
@@ -185,15 +174,13 @@ public class diffieController implements ActionListener {
                 this.view.userActivitiesGUI.setVisible(true);
             }
             this.view.repaint();
-        }
-        //Back button for Create user gui to go back to entry
+        } //Back button for Create user gui to go back to entry
         else if (source == this.view.createUserGUI.backButton) {
             refreshFields();
             setGuiVisFalse();
             this.view.entryGUI.setVisible(true);
             this.view.repaint();
-        }
-        //Back button for the loginn GUI to go back to entry GUI
+        } //Back button for the loginn GUI to go back to entry GUI
         else if (source == this.view.loginGUI.backButton) {
             refreshFields();
             setGuiVisFalse();
@@ -230,7 +217,7 @@ public class diffieController implements ActionListener {
         this.view.passwordGUI.jUserField.setText("");
         this.view.passwordGUI.jInfo.setVisible(true);
         this.view.passwordGUI.jError.setVisible(false);
-        
+
         this.view.loginGUI.jPasswordField1.setText("");
         this.view.loginGUI.jUserField.setText("");
         this.view.loginGUI.jError.setVisible(false);

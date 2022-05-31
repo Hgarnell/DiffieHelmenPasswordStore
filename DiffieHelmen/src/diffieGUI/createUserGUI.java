@@ -75,7 +75,7 @@ public class createUserGUI extends JPanel implements ActionListener {
         this.setVisible(true);
         
         //formating the errormessage
-        this.errorMessage = new JLabel("<html>Ensure all fields are filled, and that your pin number is a 4 digit integer.</html>");
+        this.errorMessage = new JLabel("<html>Ensure all fields are filled, and that your pin number is a 4 digit integer.<br> If all fields are correct, Then the username might exist already..</html>");
         errorMessage.setForeground(Color.red);
         this.errorMessage.setBounds(250,10, 250, 100);
         errorMessage.setVisible(false);

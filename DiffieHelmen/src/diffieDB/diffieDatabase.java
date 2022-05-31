@@ -58,7 +58,7 @@ public class diffieDatabase {
 
         }
     }
-    
+
     //check if user exists with int password
     public userData checkUser(String username, Integer password) {
         System.out.println("entered check user data");
@@ -84,7 +84,6 @@ public class diffieDatabase {
                 System.out.println(tempUser.getUserKeys().checkKey(getBigInt(password)));
                 // System.out.println(data.userMap.toString());
                 if (tempUser.getUserKeys().checkKey(getBigInt(password))) {
-
                     data.currentUser = tempUser;
                     data.passArrayList = getPasswords(tempUser);
                     data.userMap = getUserList();
@@ -94,9 +93,7 @@ public class diffieDatabase {
                 }
             } else {
                 System.out.println("no such user");
-//              
                 data.loginFlag = false;
-
             }
             statement.close();
 
@@ -124,26 +121,28 @@ public class diffieDatabase {
                     flag = true;
                 }
             }
-            if (rsDBMeta != null) {
-                rsDBMeta.close();
-            }
+
+            rsDBMeta.close();
+
         } catch (SQLException ex) {
         }
         return flag;
     }
 
     //add a user to the database
-    void addUser(User newUser) {
+    boolean addUser(User newUser) {
 
         try {
-            Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO Users VALUES('" + newUser.getUsername() + "', " + newUser.getUserKeys().getPROG_PUBLIC().getKey() + ", " + newUser.getUserKeys().getUSER_PUBLIC().getKey() + ", " + newUser.getUserKeys().getSHARED_KEY().getKey() + ", " + newUser.getIsAdmin() + ")");
-            statement.close();
-
+            if (!containsUser(newUser.getUsername())) {
+                Statement statement = conn.createStatement();
+                statement.executeUpdate("INSERT INTO Users VALUES('" + newUser.getUsername() + "', " + newUser.getUserKeys().getPROG_PUBLIC().getKey() + ", " + newUser.getUserKeys().getUSER_PUBLIC().getKey() + ", " + newUser.getUserKeys().getSHARED_KEY().getKey() + ", " + newUser.getIsAdmin() + ")");
+                statement.close();
+                return true;
+            }
         } catch (SQLException ex) {
             System.out.println("SQL error");
         }
-
+        return false;
     }
 
     //remove user where username matches the string
@@ -229,7 +228,6 @@ public class diffieDatabase {
     }
 
     boolean addPassword(Password password, String username) {
-        System.out.println("entered add Password");
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT passID FROM Password WHERE passID ='" + password.getPassId() + "'");
@@ -248,4 +246,16 @@ public class diffieDatabase {
         return false;
     }
 
+    boolean containsUser(String username) {
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT Username FROM Users WHERE Username ='" + username + "'");
+
+            return rs.next();
+
+        } catch (SQLException ex) {
+
+        }
+        return false;
+    }
 }

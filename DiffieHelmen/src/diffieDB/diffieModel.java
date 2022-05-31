@@ -35,23 +35,24 @@ public class diffieModel extends Observable {
 
     //notify observers that a new user has been added succesfully also ensure that pattern of secret string is 4 integers
     public boolean addUser(String username, String secret, Boolean isAdmin) {
-
+        boolean succ = false;
+        
         UserKeyGenerator k = new UserKeyGenerator();
         System.out.println("addUser notified");
+        
         if (Pattern.matches("\\d{4}", String.valueOf(secret))) {
             UserKey v = k.userKeyGenerator(new BigInteger(secret));
             if (isAdmin) {
-                this.db.addUser(new AdminUser(username, k.userKeyGenerator(new BigInteger(secret))));
+              succ =  this.db.addUser(new AdminUser(username, k.userKeyGenerator(new BigInteger(secret))));
             } else {
-                this.db.addUser(new GeneralUser(username, k.userKeyGenerator(new BigInteger(secret))));
+               succ  =  this.db.addUser(new GeneralUser(username, k.userKeyGenerator(new BigInteger(secret))));
             }
             this.setChanged();
             this.notifyObservers(this.data);
 
-            return true;
-        } else {
-            return false;
+           
         }
+        return succ;
     }
 
     //Notify the observers that data has been changed after password added to the database succesfully

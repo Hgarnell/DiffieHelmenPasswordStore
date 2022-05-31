@@ -76,7 +76,9 @@ public class diffieView extends JFrame implements Observer {
         this.createUserGUI.backButton.addActionListener(listener);
     }
 
+    //update jtable models
     public void updateTable(userData data) {
+        //update table for admin user
         if (data.currentUser.getIsAdmin()) {
             this.adminActivitiesGUI.userModel.setRowCount(0);
             this.adminActivitiesGUI.passModel.setRowCount(0);
@@ -91,6 +93,7 @@ public class diffieView extends JFrame implements Observer {
             for (String[] j : this.adminActivitiesGUI.dataPass) {
                 this.adminActivitiesGUI.passModel.addRow(j);
             }
+            
             this.adminActivitiesGUI.passModel.fireTableDataChanged();
             this.adminActivitiesGUI.userModel.fireTableDataChanged();
 
@@ -98,7 +101,9 @@ public class diffieView extends JFrame implements Observer {
             this.adminActivitiesGUI.passTable.revalidate();
 
             this.adminActivitiesGUI.repaint();
-        } else {
+        } 
+        //jtables for GEn User
+        else {
             this.userActivitiesGUI.passModel.setRowCount(0);
             this.userActivitiesGUI.dataPass = data.passArrayList;
 
