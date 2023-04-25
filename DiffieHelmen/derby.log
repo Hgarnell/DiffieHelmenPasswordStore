@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Wed Jun 01 08:05:27 NZST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-1bb9-228f-00000a7a8d00 
-on database directory C:\Users\hanna\OneDrive - AUT University\Documents\GitHub\PDC_ASS_2\DiffieHelmen\DiffieDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
-Loaded from file:/C:/Users/hanna/OneDrive%20-%20AUT%20University/Documents/NetBeansProjects/PDC_Tutorials/PDC_Tutorials/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_321-b07
-user.dir=C:\Users\hanna\OneDrive - AUT University\Documents\GitHub\PDC_ASS_2\DiffieHelmen
+Fri Jun 03 14:08:26 NZST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-2752-2e0c-00000e880530 
+on database directory C:\Users\ynn7685\Downloads\P121_20109021 (1)\PDC_ASS_2\DiffieHelmen\DiffieDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/ynn7685/Downloads/P121_20109021%20(1)/PDC_ASS_2/DiffieHelmen/lib/derby.jar
+java.vendor=AdoptOpenJDK
+java.runtime.version=11.0.11+9
+user.dir=C:\Users\ynn7685\Downloads\P121_20109021 (1)\PDC_ASS_2\DiffieHelmen
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
